@@ -1,0 +1,13 @@
+@use "../../../styles/partials/typography" as *;
+@use "../../../styles/partials/mixins" as *;
+@use "../../../styles/partials/variables" as *;
+
+.users {
+    &__list {
+        margin: 0 auto;
+        padding: 0;
+        width: 90%;
+        max-width: 50rem;
+        @include flex(center, stretch, row, wrap)
+    }
+}

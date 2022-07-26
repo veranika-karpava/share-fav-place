@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.scss'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import NewPlace from './places/pages/NewPlace';
 import Users from './user/pages/Users';

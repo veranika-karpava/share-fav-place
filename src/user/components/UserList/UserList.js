@@ -5,8 +5,8 @@ import './UserList.scss';
 const UserList = ({ users }) => {
     if (users.length === 0) {
         return (
-            <div className='users__message-container'>
-                <h1 className='users__message'>Sorry, users not found</h1>
+            <div className='message__container'>
+                <h1 className='message__content'>Sorry, users not found</h1>
             </div>
         );
     }

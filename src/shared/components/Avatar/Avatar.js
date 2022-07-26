@@ -3,7 +3,7 @@ import './Avatar.scss'
 
 const Avatar = ({ className, style, path, name, width }) => {
     return (
-        <div className={`avatar__${className}`} style={style}>
+        <div className='avatar' style={style}>
             <img src={path} alt={name} style={{ width: width, height: width }} className='avatar__image' />
         </div>
     );

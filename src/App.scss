@@ -1,0 +1,23 @@
+@use "./styles/partials/typography" as *;
+@use "./styles/partials/mixins" as *;
+@use "./styles/partials/variables" as *;
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    @include font-stack-main;
+    background: $bg-body;
+}
+
+.message {
+    &__container {
+        text-align: center;
+        @include flex(center, center, row, nowrap)
+    }
+}

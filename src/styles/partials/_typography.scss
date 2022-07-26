@@ -1,0 +1,37 @@
+@use "../partials/variables" as *;
+@use "../partials/mixins" as *;
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../../assets/fonts/OpenSans-Bold.woff2') format ("woff2"),
+        url('../../assets/fonts/OpenSans-Bold.woff2') format ("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../../assets/fonts/OpenSans-Regular.woff2') format("woff2"),
+        url('../../assets/fonts/OpenSans-Regular.woff') format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@mixin font-stack ($font-family, $font-style, $font-size, $font-weight, $line-height, $color) {
+    font-family: $font-family;
+    font-style: $font-style;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    color: $color;
+}
+
+// main font stack
+@mixin font-stack-main {
+    @include font-stack ('Open Sans', normal, 1rem, 400, 1.2rem, $main-color-users-item);
+}
+
+// font for h2 in list of users
+@mixin font-stack-subheading {
+    @include font-stack ('Open Sans', normal, 1.5rem, 400, 1.2rem, $bg-users-item-hover);
+}
