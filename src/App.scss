@@ -15,6 +15,10 @@ body {
     background: $bg-body;
 }
 
+h3 {
+    @include font-stack-main;
+}
+
 .message {
     &__container {
         text-align: center;
