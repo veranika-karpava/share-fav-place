@@ -15,12 +15,17 @@ body {
     background: $bg-body;
 }
 
+main {
+    margin-top: 5rem;
+}
+
 h3 {
     @include font-stack-main;
 }
 
 .message {
     &__container {
+        color: $bg-users-item;
         text-align: center;
         @include flex(center, center, row, nowrap)
     }

@@ -1,10 +1,12 @@
 import React from 'react';
+
 import UserList from '../components/UserList/UserList';
 
 
 const Users = () => {
+    // const users = []
     const users = [{
-        id: Math.random(),
+        id: 'u1',
         name: 'Veranika Karpava',
         image: require('../../assets/images/photo1.jpg'),
         places: 3
