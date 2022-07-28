@@ -20,13 +20,13 @@ const MainHeader = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             {drawerIsOpen && <BackDrop onClick={closeDrawer} />}
-            {drawerIsOpen && <SideDrawer >
+            <SideDrawer show={drawerIsOpen} onClick={closeDrawer}>
                 <nav className='header__navigation-links-mobile'>
                     <NavLinks />
                 </nav>
-            </SideDrawer>}
+            </SideDrawer>
             <Header>
                 <Link to='/' className='header__link-logo'>
                     <h1 className='header__logo'>Ur<span className='header__container-icon'>
@@ -41,7 +41,7 @@ const MainHeader = () => {
                     <NavLinks />
                 </nav>
             </Header>
-        </>
+        </React.Fragment>
     );
 };
 
