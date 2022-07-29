@@ -6,17 +6,17 @@ import { CSSTransition } from 'react-transition-group';
 
 import './SideDrawer.scss';
 
-const SideDrawer = (props) => {
+const SideDrawer = ({ show, onClick, children }) => {
     const nodeRef = useRef(null)
     const content = (
         <CSSTransition
-            in={props.show}
+            in={show}
             timeout={200}
             classNames='slide-in-left'
             nodeRef={nodeRef}
             mountOnEnter
             unmountOnExit>
-            <aside className='header__side-drawer' onClick={props.onClick}>{props.children}</aside>
+            <aside className='header__side-drawer' onClick={onClick}>{children}</aside>
         </CSSTransition>);
 
     return ReactDOM.createPortal(content, document.getElementById('drawer-hook'));
