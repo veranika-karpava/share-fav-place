@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import './App.scss'
 import MainHeader from './shared/components/MainHeader/MainHeader';
 import NewPlace from './places/pages/NewPlace';
+import UserPlaces from './places/pages/UserPlaces';
 import Users from './user/pages/Users';
 
 const App = () => {
@@ -16,6 +17,9 @@ const App = () => {
         <Route path='/' exact>
           {/* means that when url with slash it renders Users page. Exact word means the only this path reneder Users page */}
           <Users />
+        </Route>
+        <Route path='/:userId/places' exact>
+          <UserPlaces />
         </Route>
         <Route path='/places/new' exact>
           <NewPlace />

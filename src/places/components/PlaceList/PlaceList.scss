@@ -1,0 +1,12 @@
+@use "../../../styles/partials/typography" as *;
+@use "../../../styles/partials/mixins" as *;
+@use "../../../styles/partials/variables" as *;
+
+.user-places {
+    &__list {
+        margin: 1rem auto;
+        padding: 0;
+        width: 90%;
+        max-width: 40rem;
+    }
+}
