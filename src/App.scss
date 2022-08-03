@@ -19,15 +19,23 @@ main {
     margin-top: 5rem;
 }
 
+h2 {
+    @include font-stack-subheading;
+}
+
 h3 {
     @include font-stack-main;
 }
 
 .message {
-    &__container {
-        color: $bg-users-item;
-        text-align: center;
-        @include flex(center, center, row, nowrap)
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+    color: $bg-users-item;
+    @include flex(center, center, row, nowrap);
+
+    &__content {
+        padding: 1rem;
     }
 }
 

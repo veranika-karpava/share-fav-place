@@ -2,6 +2,7 @@ import React from 'react';
 
 import './PlaceItem.scss';
 import Card from '../../../shared/components/Card/Card';
+import Button from '../../../shared/components/Button/Button';
 
 const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates }) => {
     return (
@@ -16,11 +17,9 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                     <p className='user-places__description'>{description}</p>
                 </div>
                 <div className='user-places__actions'>
-                    <button className='user-places__button-action'>VIEW ON MAP</button>
-                    {/* in future should be shown only for user of this places */}
-                    <button className='user-places__button-action'>EDIT</button>
-                    {/* in future should be shown only for user of this places */}
-                    <button className='user-places__button-action'>DELETE</button>
+                    <Button inverse > VIEW ON MAP </Button>
+                    <Button to={`places/${id}`} > EDIT </Button>
+                    <Button danger>DELETE</Button>
                 </div>
             </Card>
         </li>

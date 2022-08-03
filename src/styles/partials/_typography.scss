@@ -39,3 +39,12 @@
         font-size: 1.4rem;
     }
 }
+
+// font for button
+@mixin font-stack-button {
+    @include font-stack ('Open Sans', normal, 0.8rem, 400, 1rem, $main-color-users-item);
+
+    @include tablet {
+        @include font-stack ('Open Sans', normal, 1rem, 400, 1.2rem, $main-color-users-item);
+    }
+}

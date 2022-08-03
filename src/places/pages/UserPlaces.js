@@ -1,5 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+// get router params from dynamic router
+
+
 import PlaceList from '../components/PlaceList/PlaceList';
+
 
 const DUMMY_PLACES = [
     {
@@ -29,9 +34,12 @@ const DUMMY_PLACES = [
 ];
 
 const UserPlaces = () => {
+    const userId = useParams().userId;  // get userID from router
+    const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId);
+
     return (
         <section className='user-places'>
-            <PlaceList items={DUMMY_PLACES} />
+            <PlaceList items={loadedPlaces} />
         </section>
     );
 };
