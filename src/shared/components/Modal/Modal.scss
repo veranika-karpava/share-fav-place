@@ -1,0 +1,61 @@
+@use "../../../styles/partials/typography" as *;
+@use "../../../styles/partials/mixins" as *;
+@use "../../../styles/partials/variables" as *;
+
+.modal {
+    z-index: 100;
+    position: fixed;
+    top: 22vh;
+    left: 10%;
+    width: 80%;
+    background: $main-color-users-item;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 8px;
+
+    @include tablet {
+        left: calc(50% - 20rem);
+        width: 40rem;
+    }
+
+    &__header {
+        width: 100%;
+        padding: 1rem 0.5rem;
+        background: $bg-header-modal;
+
+    }
+
+    &__title {
+        text-align: center;
+        @include font-stack-subheading;
+        color: $main-color-users-item;
+        margin: 0.5rem;
+    }
+
+    &__content {
+        padding: 1rem 0.5rem;
+
+        &-place-item-contents {
+            padding: 0;
+        }
+    }
+
+    &__footer {
+        padding: 1rem 0.5rem;
+
+        &-place-item-actions {
+            text-align: right;
+
+            & button,
+            & a {
+                margin: 0.5rem;
+            }
+        }
+    }
+
+
+    &__map-container {
+        height: 15rem;
+        width: 100%;
+    }
+
+}
