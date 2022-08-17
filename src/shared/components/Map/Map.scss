@@ -1,0 +1,8 @@
+@use "../../../styles/partials/typography" as *;
+@use "../../../styles/partials/mixins" as *;
+@use "../../../styles/partials/variables" as *;
+
+.map {
+    width: 100%;
+    height: 100%;
+}

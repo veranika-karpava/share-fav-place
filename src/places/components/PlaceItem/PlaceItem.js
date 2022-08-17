@@ -5,6 +5,7 @@ import './PlaceItem.scss';
 import Card from '../../../shared/components/Card/Card';
 import Button from '../../../shared/components/Button/Button';
 import Modal from '../../../shared/components/Modal/Modal';
+import Map from '../../../shared/components/Map/Map';
 
 const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates }) => {
     const [showMap, setShowMap] = useState(false);
@@ -22,9 +23,10 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                 footerClass='place-item-actions'
                 footer={<Button onClick={closeMapHandler}>CLOSE</Button>}>
                 <div className='modal__map-container'>
-                    <h2>The MAP!</h2>
+                    <Map center={coordinates} zoom={16} />
                 </div>
             </Modal>
+
             <li className='user-places__item'>
                 <Card className='user-places__card'>
                     <div className='user-places__view'>
