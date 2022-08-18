@@ -16,7 +16,8 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
 
     return (
         <>
-            <Modal show={showMap}
+            <Modal
+                show={showMap}
                 onCancel={closeMapHandler}
                 header={address}
                 contentClass='place-item-contents'

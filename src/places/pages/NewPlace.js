@@ -1,10 +1,14 @@
 import React from 'react';
 
+
+import './NewPlace.scss';
+import Input from '../../shared/components/Input/Input';
+
 const NewPlace = () => {
     return (
-        <h2>
-            NewPlace works!
-        </h2>
+        <form className='place-form'>
+            <Input element="input" type="text" label="Title" errorText='Please enter a valid title' />
+        </form>
     );
 };
 
