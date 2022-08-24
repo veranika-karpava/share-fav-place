@@ -29,7 +29,7 @@ export const validate = (value, validators) => {
     let isValid = true;
     for (const validator of validators) {
         if (validator.type === VALIDATOR_TYPE_REQUIRE) {
-            isValid = isValid && value.trim().length > 0;
+            isValid = isValid && value.trim().length > 0; //isValid = true && false => false
         } // that input isn't empty
         if (validator.type === VALIDATOR_TYPE_MINLENGTH) {
             isValid = isValid && value.trim().length >= validator.val;

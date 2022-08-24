@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 
 import { validate } from '../../util/validators';// import validate function
 import './Input.scss';
@@ -22,9 +22,12 @@ const inputReducer = (state, action) => {
     }
 }
 
-const Input = ({ element, type, id, placeholder, rows, label, errorText, validators }) => {
+const Input = ({ element, type, id, placeholder, rows, label, errorText, validators, onInput }) => {
 
     const [inputState, dispatch] = useReducer(inputReducer, { value: '', isValid: false, isTouched: false })
+
+    // new value from input filed back to the place where we use Input component
+    useEffect(() => { onInput(id, inputState.value, inputState.isValid) }, [id, inputState.value, inputState.isValid, onInput]);
 
     // call reducer function and pass current state
     const onChangeHandler = (e) => {
@@ -38,14 +41,13 @@ const Input = ({ element, type, id, placeholder, rows, label, errorText, validat
         });
     }
 
+
     const elementForm = element === 'input'
         ?
         (<input id={id} type={type} placeholder={placeholder} className='form-place__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />)
         :
         (<textarea id={id} rows={rows || 3} className='form-place__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />
         );
-
-
 
     return (
         <div className={`form-place__container ${!inputState.isValid && inputState.isTouched && 'form-place__container--invalid'}`}>
