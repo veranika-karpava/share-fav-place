@@ -24,15 +24,15 @@
         @include tablet {
             padding: 0.5rem 1.5rem;
         }
-    }
 
-    &:disabled,
-    &:hover:disabled,
-    &:active:disabled {
-        background: $color-button-disabled;
-        color: $color-font-disabled;
-        border-color: $color-button-disabled;
-        cursor: not-allowed;
+        &:disabled,
+        &:hover:disabled,
+        &:active:disabled {
+            background: $color-button-disabled;
+            color: $color-font-disabled;
+            border-color: $color-button-disabled;
+            cursor: not-allowed;
+        }
     }
 
     &__button-inverse {
@@ -56,6 +56,7 @@
             border-color: $color-button-delete-hover;
         }
     }
+
 }
 
 
