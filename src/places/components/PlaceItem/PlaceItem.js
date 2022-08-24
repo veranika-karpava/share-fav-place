@@ -40,7 +40,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                     </div>
                     <div className='user-places__actions'>
                         <Button inverse onClick={openMapHandler} > VIEW ON MAP </Button>
-                        <Button to={`places/${id}`} > EDIT </Button>
+                        <Button to={`/places/${id}`} > EDIT </Button>
                         <Button danger>DELETE</Button>
                     </div>
                 </Card>

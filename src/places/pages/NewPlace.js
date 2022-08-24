@@ -58,12 +58,14 @@ const NewPlace = () => {
     }
 
     return (
-        <form className='place-form'>
-            <Input id='title' element="input" type="text" label="Title" errorText='Please enter a valid title.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
-            <Input id='description' element='textarea' label="Description" errorText='Please enter a valid description (at least 5 characters).' validators={[VALIDATOR_MINLENGTH(5)]} onInput={inputHandler} />
-            <Input id='address' element='input' label="Address" errorText='Please enter a valid address.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
-            <Button type="submit" disabled={!formState.isValid} onClick={placeSubmitHandler}>ADD PLACE</Button>
-        </form>
+        <section className='place-form'>
+            <form className='place-form__form'>
+                <Input id='title' element="input" type="text" label="Title" errorText='Please enter a valid title.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
+                <Input id='description' element='textarea' label="Description" errorText='Please enter a valid description (at least 5 characters).' validators={[VALIDATOR_MINLENGTH(5)]} onInput={inputHandler} />
+                <Input id='address' element='input' label="Address" errorText='Please enter a valid address.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
+                <Button type="submit" disabled={!formState.isValid} onClick={placeSubmitHandler}>ADD PLACE</Button>
+            </form>
+        </section>
     );
 };
 

@@ -22,9 +22,13 @@ const inputReducer = (state, action) => {
     }
 }
 
-const Input = ({ element, type, id, placeholder, rows, label, errorText, validators, onInput }) => {
+const Input = ({ element, type, id, placeholder, rows, label, errorText, validators, onInput, value, valid }) => {
 
-    const [inputState, dispatch] = useReducer(inputReducer, { value: '', isValid: false, isTouched: false })
+    const [inputState, dispatch] = useReducer(inputReducer, {
+        value: value || '',
+        isValid: valid || false,
+        isTouched: false
+    })
 
     // new value from input filed back to the place where we use Input component
     useEffect(() => { onInput(id, inputState.value, inputState.isValid) }, [id, inputState.value, inputState.isValid, onInput]);

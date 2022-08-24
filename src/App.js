@@ -6,6 +6,7 @@ import MainHeader from './shared/components/MainHeader/MainHeader';
 import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import Users from './user/pages/Users';
+import UpdatePlace from './places/pages/UpdatePlace';
 
 const App = () => {
   return <BrowserRouter>
@@ -23,6 +24,10 @@ const App = () => {
         </Route>
         <Route path='/places/new' exact>
           <NewPlace />
+        </Route>
+        {/* the order is important.  */}
+        <Route path='/places/:placeId'>
+          <UpdatePlace />
         </Route>
         <Redirect to='/' />
         {/* means that redirect to '/' path that render Users pages */}
