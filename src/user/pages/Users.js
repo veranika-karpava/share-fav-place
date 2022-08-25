@@ -11,7 +11,20 @@ const Users = () => {
         image: require('../../assets/images/photo1.jpg'),
         places: 3
 
-    }]
+    },
+    {
+        id: 'u2',
+        name: 'Andrei Karpau',
+        image: require('../../assets/images/photo1.jpg'),
+        places: 2
+    },
+    {
+        id: 'u3',
+        name: 'Nika Hlazkova',
+        image: require('../../assets/images/photo1.jpg'),
+        places: 1
+    }
+    ]
     return (
         <section className='users'>
             <UserList users={users} />

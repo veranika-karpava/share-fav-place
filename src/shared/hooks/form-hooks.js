@@ -13,7 +13,6 @@ const formReducer = (state, action) => {
                     formIsValid = formIsValid && state.inputs[inputId].isValid
                 }
             }
-
             return {
                 ...state,
                 inputs: {
@@ -21,6 +20,11 @@ const formReducer = (state, action) => {
                     [action.inputId]: { value: action.value, isValid: action.isValid }
                 },
                 isValid: formIsValid
+            };
+        case 'SET_DATA':
+            return {
+                inputs: action.inputs,
+                isValid: action.formIsValid
             }
         default:
             return state;
@@ -30,14 +34,23 @@ const formReducer = (state, action) => {
 
 // custom hooks
 export const useForm = (initialInputs, initialFormValidity) => {
+
     const [formState, dispatch] = useReducer(formReducer, {
         inputs: initialInputs,
         isValid: initialFormValidity
     });
+
     // for sharing information from input component to newplace
     const inputHandler = useCallback((id, value, isValid) => {
         dispatch({ type: 'INPUT_CHANGE', value: value, isValid: isValid, inputId: id })
     }, [])
     // empty dependencies means if component re-renders or re-executes, this func will be stored away by React and will be reused( no creation new functio  object) and not changed => doesn't effect the useEffect
-    return [formState, inputHandler]
+
+    // to get information form server before update data
+    const setFormData = useCallback((inputData, formValidity) => {
+        dispatch({ type: 'SET_DATA', inputs: inputData, formIsValid: formValidity })
+    }, [])
+
+
+    return [formState, inputHandler, setFormData]
 }
