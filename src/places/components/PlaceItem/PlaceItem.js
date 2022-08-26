@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 import './PlaceItem.scss';
 import Card from '../../../shared/components/Card/Card';
 import Button from '../../../shared/components/Button/Button';

@@ -1,16 +1,18 @@
 import React from 'react';
 
-
 import './PlaceList.scss';
 import Card from '../../../shared/components/Card/Card';
 import PlaceItem from '../PlaceItem/PlaceItem';
+import Button from '../../../shared/components/Button/Button';
+
 
 const PlaceList = ({ items }) => {
     if (items.length === 0) {
         return <div className='message'>
             <Card>
-                <h2 className='message__content'>No places found. Maybe create one?</h2>
-                <button>Share Place</button>
+                <h2 className='message__content'>No places found.</h2>
+                <p className='message__content'>Maybe create one?</p>
+                <Button to='/places/new'>SHARE YOUR PLACE</Button>
             </Card>
         </div>
     }
