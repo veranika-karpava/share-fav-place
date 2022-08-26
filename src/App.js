@@ -7,6 +7,7 @@ import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import Users from './user/pages/Users';
 import UpdatePlace from './places/pages/UpdatePlace';
+import Auth from './user/pages/Auth';
 
 const App = () => {
   return <BrowserRouter>
@@ -28,6 +29,9 @@ const App = () => {
         {/* the order is important.  */}
         <Route path='/places/:placeId'>
           <UpdatePlace />
+        </Route>
+        <Route path='/auth'>
+          <Auth />
         </Route>
         <Redirect to='/' />
         {/* means that redirect to '/' path that render Users pages */}
