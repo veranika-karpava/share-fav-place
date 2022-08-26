@@ -8,10 +8,26 @@ import Map from '../../../shared/components/Map/Map';
 
 const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates }) => {
     const [showMap, setShowMap] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     // handler for modal with map
     const openMapHandler = () => setShowMap(true);
     const closeMapHandler = () => setShowMap(false);
+
+    // handler for show warning modal
+    const showDeleteWarningHandler = () => {
+        setShowConfirmModal(true)
+    }
+
+    const cancelDeleteHandler = () => {
+        setShowConfirmModal(false)
+    }
+
+    const confirmDeleteHandler = () => {
+        setShowConfirmModal(false)
+        console.log('Delete')
+    }
+
 
     return (
         <>
@@ -27,6 +43,16 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                 </div>
             </Modal>
 
+            <Modal header='Are you sure?' footerClass='place-item-actions' footer={
+                <>
+                    <Button inverse onClick={cancelDeleteHandler}>CANCEL</Button>
+                    <Button danger onClick={confirmDeleteHandler}>DELETE</Button>
+                </>
+            } show={showConfirmModal}>
+                <p>Do you want to proceed and delete this place?</p>
+                <p>Please note that it can't be undone thereafter</p>
+            </Modal>
+
             <li className='user-places__item'>
                 <Card className='user-places__card'>
                     <div className='user-places__view'>
@@ -40,7 +66,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                     <div className='user-places__actions'>
                         <Button inverse onClick={openMapHandler} > VIEW ON MAP </Button>
                         <Button to={`/places/${id}`} > EDIT </Button>
-                        <Button danger>DELETE</Button>
+                        <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>
                     </div>
                 </Card>
             </li>

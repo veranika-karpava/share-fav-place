@@ -1,10 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-// get router params from dynamic router
-
+import { useParams } from 'react-router-dom';// get router params from dynamic router
 
 import PlaceList from '../components/PlaceList/PlaceList';
-
 
 const DUMMY_PLACES = [
     {
