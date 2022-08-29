@@ -15,11 +15,50 @@ const App = () => {
 
   const login = useCallback(() => {
     setIsLoggedIn(true)
-  }, [])
+  }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false)
-  }, [])
+  }, []);
+
+  let routes;
+  if (isLoggedIn) {
+    routes = (
+      <Switch>
+        {/* means that when url with slash it renders Users page. Exact word means the only this path reneder Users page */}
+        <Route path='/' exact>
+          <Users />
+        </Route>
+        <Route path='/:userId/places' exact>
+          <UserPlaces />
+        </Route>
+        <Route path='/places/new' exact>
+          <NewPlace />
+        </Route>
+        {/* the order is important.  */}
+        <Route path='/places/:placeId'>
+          <UpdatePlace />
+        </Route>
+        <Redirect to='/' />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path='/' exact>
+          <Users />
+        </Route>
+        <Route path='/:userId/places' exact>
+          <UserPlaces />
+        </Route>
+        <Route path='/auth'>
+          <Auth />
+        </Route>
+        <Redirect to='/auth' />
+        {/* means that redirect to '/' path that render Users pages */}
+      </Switch>
+    );
+  }
 
 
   return <AuthContext.Provider value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}>
@@ -27,28 +66,7 @@ const App = () => {
       {/* it means that app use router that will display in url  */}
       <MainHeader />
       <main>
-        <Switch>
-          {/* use for switch when path is the same */}
-          <Route path='/' exact>
-            {/* means that when url with slash it renders Users page. Exact word means the only this path reneder Users page */}
-            <Users />
-          </Route>
-          <Route path='/:userId/places' exact>
-            <UserPlaces />
-          </Route>
-          <Route path='/places/new' exact>
-            <NewPlace />
-          </Route>
-          {/* the order is important.  */}
-          <Route path='/places/:placeId'>
-            <UpdatePlace />
-          </Route>
-          <Route path='/auth'>
-            <Auth />
-          </Route>
-          <Redirect to='/' />
-          {/* means that redirect to '/' path that render Users pages */}
-        </Switch>
+        {routes}
       </main>
     </BrowserRouter>
   </AuthContext.Provider>
