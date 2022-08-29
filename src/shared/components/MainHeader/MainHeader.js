@@ -23,7 +23,7 @@ const MainHeader = () => {
         <React.Fragment>
             {drawerIsOpen && <BackDrop onClick={closeDrawerHandler} />}
             <SideDrawer show={drawerIsOpen}>
-                <nav className='header__navigation-links-mobile'>
+                <nav className='header__navigation-links-mobile' onClick={closeDrawerHandler}>
                     <NavLinks />
                 </nav>
             </SideDrawer>

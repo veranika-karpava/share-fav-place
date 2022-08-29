@@ -7,20 +7,20 @@ const Users = () => {
     // const users = []
     const users = [{
         id: 'u1',
-        name: 'Veranika Karpava',
+        name: 'An Smith',
         image: require('../../assets/images/photo1.jpg'),
-        places: 3
+        places: 2
 
     },
     {
         id: 'u2',
-        name: 'Andrei Karpau',
+        name: 'John Silk',
         image: require('../../assets/images/photo1.jpg'),
         places: 2
     },
     {
         id: 'u3',
-        name: 'Nika Hlazkova',
+        name: 'Eva Dumn',
         image: require('../../assets/images/photo1.jpg'),
         places: 1
     }
