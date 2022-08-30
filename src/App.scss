@@ -29,14 +29,14 @@ h3 {
 }
 
 .message {
-    text-align: center;
-    margin: 0 auto;
     width: 90%;
-    color: $bg-users-item;
+    text-align: center;
     @include flex(center, center, row, nowrap);
 
     &__content {
-        padding: 1rem;
+        width: 100%;
+        margin-bottom: 1rem;
+        @include font-stack-message-error;
     }
 }
 

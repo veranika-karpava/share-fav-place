@@ -6,7 +6,7 @@
     &__list {
         margin: 0 auto;
         padding: 0;
-        width: 90%;
+        width: 100%;
         max-width: 50rem;
         @include flex(center, stretch, row, wrap)
     }

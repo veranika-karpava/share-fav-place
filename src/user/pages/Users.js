@@ -2,14 +2,13 @@ import React from 'react';
 
 import UserList from '../components/UserList/UserList';
 
-
 const Users = () => {
     // const users = []
     const users = [{
         id: 'u1',
         name: 'An Smith',
         image: require('../../assets/images/photo1.jpg'),
-        places: 2
+        places: 3
 
     },
     {

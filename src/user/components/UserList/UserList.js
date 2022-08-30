@@ -9,7 +9,7 @@ const UserList = ({ users }) => {
         return (
             <div className='message'>
                 <Card>
-                    <h1 className='message__content'>Sorry, users not found</h1>
+                    <h1 className='message__content'>Sorry, no users found</h1>
                 </Card>
             </div>
         );

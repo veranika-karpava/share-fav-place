@@ -95,7 +95,7 @@ const UpdatePlace = () => {
     if (isLoading) {
         return (
             <div className='message'>
-                <h2>Loading....</h2>
+                <h2 className='mesaage__content'>...Loading....</h2>
             </div>
         )
     }

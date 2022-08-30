@@ -48,3 +48,8 @@
         @include font-stack ('Open Sans', normal, 1rem, 400, 1.2rem, $main-color-users-item);
     }
 }
+
+// font for content in error message
+@mixin font-stack-message-error {
+    @include font-stack ('Open Sans', normal, 1.25rem, 700, 1.25rem, $color-header-button);
+}

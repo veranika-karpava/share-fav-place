@@ -10,8 +10,7 @@ const PlaceList = ({ items }) => {
     if (items.length === 0) {
         return <div className='message'>
             <Card>
-                <h2 className='message__content'>No places found.</h2>
-                <p className='message__content'>Maybe create one?</p>
+                <h2 className='message__content'>No places found. Maybe create one?</h2>
                 <Button to='/places/new'>SHARE YOUR PLACE</Button>
             </Card>
         </div>
