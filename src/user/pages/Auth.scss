@@ -1,0 +1,39 @@
+@use "../../styles//partials//typography" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.user-auth {
+    @include flex(center, center, row, nowrap);
+
+    &__authentication {
+        @include flex(center, flex-start, column, nowrap);
+        width: 90%;
+        max-width: 40rem;
+    }
+
+    &__header {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        color: $font-color-place-card;
+    }
+
+    &__form {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    &__container {
+        width: 100%;
+        @include flex(flex-end, center, row, nowrap);
+        color: $font-color-place-card;
+        font-size: 0.8rem;
+        gap: 0.5rem;
+
+        @include tablet {
+            font-size: 1rem;
+            gap: 1rem;
+        }
+    }
+
+}

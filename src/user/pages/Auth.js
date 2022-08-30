@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-
+import './Auth.scss';
 import Card from '../../shared/components/Card/Card';
 import Input from '../../shared/components/Input/Input';
 import Button from '../../shared/components/Button/Button';
@@ -23,14 +23,9 @@ const Auth = () => {
                 value: '',
                 isValid: false
             }
-        }
-    )
-
-    const authSubmitHandler = (e) => {
-        e.preventDefault();
-        console.log(formState.inputs);
-        auth.login();
-    }
+        },
+        false
+    );
 
     const switchModeHandler = () => {
         if (!isLoginMode) {
@@ -43,12 +38,28 @@ const Auth = () => {
         setIsLoginMode(prevMode => !prevMode)
     }
 
+    const authSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log(formState.inputs);
+        auth.login();
+    }
+
+
     return (
         <section className='user-auth'>
             <Card className='user-auth__authentication'>
-                <h2>Login Required</h2>
-                <form className='user-auth__form'>
-                    {!isLoginMode && <Input id='username' element='input' type='text' label='Username' placeholder='Please enter your Username' validators={[VALIDATOR_REQUIRE()]} errorText='Please enter an Username' onInput={inputHandler} />}
+                <h2 className='user-auth__header'>{isLoginMode ? 'Login' : 'Sign Up'}</h2>
+                <form className='user-auth__form' onSubmit={authSubmitHandler}>
+                    {!isLoginMode &&
+                        (<Input
+                            id='username'
+                            element='input'
+                            type='text'
+                            label='Username'
+                            placeholder='Please enter your Username'
+                            validators={[VALIDATOR_REQUIRE()]}
+                            errorText='Please enter an Username' onInput={inputHandler} />
+                        )}
                     <Input
                         id='email'
                         element='input'
@@ -67,9 +78,13 @@ const Auth = () => {
                         validators={[VALIDATOR_MINLENGTH(5)]}
                         errorText='Please enter a valid password, at least 5 characters.'
                         onInput={inputHandler} />
-                    <Button type='submit' onClick={authSubmitHandler} disabled={!formState.isValid}>{isLoginMode ? 'LOG IN' : 'SIGN UP'}</Button>
+                    <Button type='submit' disabled={!formState.isValid}>{isLoginMode ? 'LOG IN' : 'SIGN UP'}</Button>
                 </form>
-                <Button inverse onClick={switchModeHandler}>SWITCH TO {isLoginMode ? 'SIGN UP' : 'LOG IN'}</Button>
+                <div className='user-auth__container'>
+                    <p>{isLoginMode ? `Don't have an account?` : 'Do you have an account'} </p>
+                    <Button inverse onClick={switchModeHandler}>SWITCH TO {isLoginMode ? 'SIGN UP' : 'LOG IN'}</Button>
+                </div>
+
             </Card>
         </section>
     );
