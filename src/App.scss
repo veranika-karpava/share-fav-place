@@ -60,3 +60,11 @@ h3 {
     opacity: 0;
     transition: all 200ms;
 }
+
+.user-places {
+    @include flex(center, center, column, nowrap);
+
+    @include tablet {
+        @include flex(center, center, row, nowrap);
+    }
+}

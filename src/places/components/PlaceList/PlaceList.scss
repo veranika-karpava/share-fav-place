@@ -4,9 +4,12 @@
 
 .user-places {
     &__list {
-        margin: 1rem auto;
         padding: 0;
         width: 90%;
-        max-width: 40rem;
+        @include flex(center, center, column, nowrap);
+
+        @include tablet {
+            @include flex(center, center, row, wrap);
+        }
     }
 }

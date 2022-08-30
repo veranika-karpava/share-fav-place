@@ -5,6 +5,13 @@
 .user-places {
     &__item {
         margin: 1rem 0;
+        width: calc(90% - 2rem);
+        max-width: 30rem;
+
+        @include tablet {
+            margin: 1rem 2rem;
+            max-width: 30rem;
+        }
     }
 
     &__card {
