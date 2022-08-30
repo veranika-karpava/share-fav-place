@@ -9,8 +9,11 @@ $bg-users-item-hover: #ffd900; //  // bg for list of users in main page when it 
 $color-header-button: #ff0055;
 
 
+
 // color for fonts
 $main-color-users-item: white;
+$font-color-place-card: black;
+$font-color-warning: red;
 
 // button
 $color-button-hover: #ff4382;
@@ -21,3 +24,6 @@ $color-button-delete-hover: #f34343;
 
 //  modal
 $bg-header-modal: #2a006e;
+
+// background for invalid form
+$color-form-invalid: #ffd1d1;

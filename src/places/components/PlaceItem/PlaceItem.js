@@ -47,12 +47,11 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
 
             <Modal header='Are you sure?' footerClass='place-item-actions' footer={
                 <>
-                    <Button inverse onClick={cancelDeleteHandler}>CANCEL</Button>
+                    <Button onClick={cancelDeleteHandler}>CANCEL</Button>
                     <Button danger onClick={confirmDeleteHandler}>DELETE</Button>
                 </>
             } show={showConfirmModal}>
-                <p>Do you want to proceed and delete this place?</p>
-                <p>Please note that it can't be undone thereafter</p>
+                <p className='modal__content'>Do you want to proceed and delete this place?</p>
             </Modal>
 
             <li className='user-places__item'>
@@ -66,7 +65,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                         <p className='user-places__description'>{description}</p>
                     </div>
                     <div className='user-places__actions'>
-                        <Button inverse onClick={openMapHandler} > VIEW ON MAP </Button>
+                        <Button inverse onClick={openMapHandler} > MAP </Button>
                         {auth.isLoggedIn &&
                             <>
                                 <Button to={`/places/${id}`} > EDIT </Button>

@@ -21,11 +21,11 @@ main {
 }
 
 h2 {
-    @include font-stack-subheading;
+    @include font-stack-second-heading;
 }
 
 h3 {
-    @include font-stack-main;
+    @include font-stack-third-heading;
 }
 
 .message {

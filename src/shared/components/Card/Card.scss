@@ -8,5 +8,6 @@
     border-radius: 6px;
     padding: 1rem;
     overflow: hidden;
+    @include flex(center, center, column, nowrap);
     background: $main-color-users-item;
 }
