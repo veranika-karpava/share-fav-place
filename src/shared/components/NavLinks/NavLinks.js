@@ -22,7 +22,7 @@ const NavLinks = () => {
                 <NavLink to='/auth' className='header__nav-link'>Log In</NavLink>
             </li>)}
             {auth.isLoggedIn && (<li className='header__nav-item'>
-                <button onClick={auth.logout}>Log Out</button>
+                <button onClick={auth.logout} className='header__logout'>Log Out</button>
             </li>)}
 
         </ul>

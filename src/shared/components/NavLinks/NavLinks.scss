@@ -38,4 +38,25 @@
             color: $main-color-users-item;
         }
     }
+
+    &__logout {
+        padding: 0.5rem;
+        border: 1px solid transparent;
+        @include font-stack-main;
+        background: transparent;
+        color: $bg-users-item;
+        cursor: pointer;
+
+        @include tablet {
+            border: 1px solid white;
+            color: $main-color-users-item;
+            border-radius: 6px;
+        }
+
+        &:hover {
+            background: $bg-users-item-hover;
+            border-color: $bg-users-item;
+            color: $bg-users-item;
+        }
+    }
 }
