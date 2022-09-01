@@ -38,5 +38,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "author": "Veranika Karpava",
+  "license": "ISC",
+  "description": "a full-stack web app",
+  "devDependencies": {}
 }
