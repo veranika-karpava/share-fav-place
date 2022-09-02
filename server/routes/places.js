@@ -53,8 +53,7 @@ placesRouter.get('/:pid', (req, res, next) => {
 //retrieve list of all places for given user id(uid)
 placesRouter.get('/user/:uid', (req, res, next) => {
     const userId = req.params.uid // { uid: 'u1'}
-    const places = DUMMY_PLACES.find((place) => place.creator === userId)
-    console.log(places)
+    const places = DUMMY_PLACES.find((place) => place.creator === userId);
     if (!places) {
         // use status method to send status code and message
         // return res
