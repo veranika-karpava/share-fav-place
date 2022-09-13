@@ -1,4 +1,5 @@
 const express = require('express');
+const HttpError = require('../models/http-error');
 
 // create our router
 const placesRouter = express.Router();
@@ -37,15 +38,18 @@ placesRouter.get('/:pid', (req, res, next) => {
         return place.id === placeId;
     })
     if (!place) {
-        // use status method to send status code and message
+        // 1) use status method to send status code and message:
         // return res
         //     .status(404)
         //     .json({ message: "Could not find a place for the provided id" })
 
-        // or trigger error handling middleware for not async
-        const error = new Error('Could not find a place for the provided id.');
-        error.code = 404;
-        throw error;
+        // 2) trigger error handling middleware for not async
+        // const error = new Error('Could not find a place for the provided id.');
+        // error.code = 404;
+        // throw error;
+
+        // 3) use class function for error handling
+        throw new HttpError('Could not find a place for the provided id.', 404);
     }
     res.json({ place: place });
 });
@@ -55,21 +59,22 @@ placesRouter.get('/user/:uid', (req, res, next) => {
     const userId = req.params.uid // { uid: 'u1'}
     const places = DUMMY_PLACES.find((place) => place.creator === userId);
     if (!places) {
-        // use status method to send status code and message
+        // 1) use status method to send status code and message
         // return res
         //     .status(404)
         //     .json({ message: "Could not find a place for the provided user id" })
 
-        // or triggered error middleware handler for ansync
-        const error = new Error('Could not find a place for the provided user id.');
-        error.code = 404;
-        return next(error);
+        // 2) triggered error middleware handler for ansync
+        // const error = new Error('Could not find a place for the provided user id.');
+        // error.code = 404;
+        // return next(error);
+
+        // 3) use class function from models
+        return next(new HttpError('Could not find a place for the provided id.', 404));
     }
 
     res.json({ places: places });
 })
-
-
 
 
 
