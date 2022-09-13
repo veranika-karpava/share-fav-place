@@ -1,82 +1,16 @@
 const express = require('express');
-const HttpError = require('../models/http-error');
+
+// import controller
+const placesControllers = require('../controllers/places-controller');
 
 // create our router
 const placesRouter = express.Router();
 
-const DUMMY_PLACES = [
-    {
-        id: 'p1',
-        title: 'Empire State Building',
-        description: 'One of the most famous sky scrapers in the world!',
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-        address: '20 W 34th St, New York, NY 10001',
-        location: {
-            lat: 40.7484405,
-            lng: -73.9878584
-        },
-        creator: 'u1'
-    },
-    {
-        id: 'p1',
-        title: 'Empire',
-        description: 'One of the most famous sky scrapers in the world!',
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-        address: '20 W 34th St, New York, NY 10001',
-        location: {
-            lat: 40.7484405,
-            lng: -73.9878584
-        },
-        creator: 'u1'
-    }
-]
-
 // get a specific place by place id(pid)
-placesRouter.get('/:pid', (req, res, next) => {
-    const placeId = req.params.pid //{ pid: 'p1'}
-    const place = DUMMY_PLACES.find(place => {
-        return place.id === placeId;
-    })
-    if (!place) {
-        // 1) use status method to send status code and message:
-        // return res
-        //     .status(404)
-        //     .json({ message: "Could not find a place for the provided id" })
-
-        // 2) trigger error handling middleware for not async
-        // const error = new Error('Could not find a place for the provided id.');
-        // error.code = 404;
-        // throw error;
-
-        // 3) use class function for error handling
-        throw new HttpError('Could not find a place for the provided id.', 404);
-    }
-    res.json({ place: place });
-});
+placesRouter.get('/:pid', placesControllers.getPlaceById);
 
 //retrieve list of all places for given user id(uid)
-placesRouter.get('/user/:uid', (req, res, next) => {
-    const userId = req.params.uid // { uid: 'u1'}
-    const places = DUMMY_PLACES.find((place) => place.creator === userId);
-    if (!places) {
-        // 1) use status method to send status code and message
-        // return res
-        //     .status(404)
-        //     .json({ message: "Could not find a place for the provided user id" })
-
-        // 2) triggered error middleware handler for ansync
-        // const error = new Error('Could not find a place for the provided user id.');
-        // error.code = 404;
-        // return next(error);
-
-        // 3) use class function from models
-        return next(new HttpError('Could not find a place for the provided id.', 404));
-    }
-
-    res.json({ places: places });
-})
-
-
+placesRouter.get('/user/:uid', placesControllers.getPlaceByUserId)
 
 module.exports = placesRouter;
 
