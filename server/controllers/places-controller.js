@@ -79,12 +79,12 @@ const getPlaceByUserId = (req, res, next) => {
 // middleware function for create new place
 const createPlace = (req, res, next) => {
     // data that we recived from post request
-    const { title, descriptrion, coordinates, address, creator } = req.body;
+    const { title, description, coordinates, address, creator } = req.body;
 
     const createdPlace = {
         id: uuid(),
         title,
-        descriptrion,
+        description,
         location: coordinates,
         address,
         creator
@@ -93,6 +93,26 @@ const createPlace = (req, res, next) => {
     DUMMY_PLACES.push(createdPlace);
 
     res.status(201).json({ place: createdPlace })
+}
+
+// for updating place by id
+const updatePlaceById = (req, res, next) => {
+    const { title, description } = req.body;
+    const placeId = req.params.pid
+    // use spread operator to update copy of data at first, and when all data is updated, will update original
+    const updatedPlace = { ...DUMMY_PLACES.find(place => place.id === placeId) };
+    const placeIndex = DUMMY_PLACES.findIndex(place => place.id === placeId);
+    updatedPlace.title = title;
+    updatedPlace.description = description;
+
+    DUMMY_PLACES[placeIndex] = updatedPlace;
+
+    res.status(200).json({ place: updatedPlace })
+
+}
+
+// for delete place by id
+const deletePlaceById = (req, res, next) => {
 
 
 }
@@ -102,3 +122,5 @@ const createPlace = (req, res, next) => {
 exports.getPlaceById = getPlaceById;
 exports.getPlaceByUserId = getPlaceByUserId;
 exports.createPlace = createPlace;
+exports.updatePlaceById = updatePlaceById;
+exports.deletePlaceById = deletePlaceById;
