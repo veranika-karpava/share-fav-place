@@ -1,4 +1,5 @@
 // file focus on middleware functions for places
+const { v4: uuid } = require('uuid');
 
 // import model for handling error
 const HttpError = require('../models/http-error');
@@ -50,7 +51,7 @@ const getPlaceById = (req, res, next) => {
         throw new HttpError('Could not find a place for the provided id.', 404);
     }
     res.json({ place: place })
-}
+};
 
 // function for retrieving list of all places for given user id(uid)
 
@@ -73,8 +74,31 @@ const getPlaceByUserId = (req, res, next) => {
     }
 
     res.json({ places: places });
+};
+
+// middleware function for create new place
+const createPlace = (req, res, next) => {
+    // data that we recived from post request
+    const { title, descriptrion, coordinates, address, creator } = req.body;
+
+    const createdPlace = {
+        id: uuid(),
+        title,
+        descriptrion,
+        location: coordinates,
+        address,
+        creator
+    };
+
+    DUMMY_PLACES.push(createdPlace);
+
+    res.status(201).json({ place: createdPlace })
+
+
 }
+
 
 // for export many things
 exports.getPlaceById = getPlaceById;
 exports.getPlaceByUserId = getPlaceByUserId;
+exports.createPlace = createPlace;

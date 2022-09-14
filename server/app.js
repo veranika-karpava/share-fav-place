@@ -8,8 +8,11 @@ const placesRouter = require('./routes/places');
 
 const app = express();
 
-// registrate middleware for place router
+// registrate middleware to parse body. it should be before router middleware, because need to parse data and then router. Now we could use data from post request in function 
 
+app.use(bodyParser.json());
+
+// registrate middleware for place router
 // express.js will forward requests to our places routes middleware if their path starts with /api/places
 app.use('/api/places', placesRouter);
 
