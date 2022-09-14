@@ -54,11 +54,10 @@ const getPlaceById = (req, res, next) => {
 };
 
 // function for retrieving list of all places for given user id(uid)
-
-const getPlaceByUserId = (req, res, next) => {
+const getPlacesByUserId = (req, res, next) => {
     const userId = req.params.uid // { uid: 'u1'}
-    const places = DUMMY_PLACES.find((place) => place.creator === userId);
-    if (!places) {
+    const places = DUMMY_PLACES.filter((place) => place.creator === userId);
+    if (!places || places.length === 0) {
         // 1) use status method to send status code and message
         // return res
         //     .status(404)
@@ -70,7 +69,7 @@ const getPlaceByUserId = (req, res, next) => {
         // return next(error);
 
         // 3) use class function from models
-        return next(new HttpError('Could not find a place for the provided id.', 404));
+        return next(new HttpError('Could not find a place for the provided user id.', 404));
     }
 
     res.json({ places: places });
@@ -120,7 +119,7 @@ const deletePlaceById = (req, res, next) => {
 
 // for export many things
 exports.getPlaceById = getPlaceById;
-exports.getPlaceByUserId = getPlaceByUserId;
+exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlaceById = updatePlaceById;
 exports.deletePlaceById = deletePlaceById;

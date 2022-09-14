@@ -10,7 +10,7 @@ const placesRouter = express.Router();
 placesRouter.get('/:pid', placesControllers.getPlaceById);
 
 //retrieve list of all places for given user id(uid)
-placesRouter.get('/user/:uid', placesControllers.getPlaceByUserId);
+placesRouter.get('/user/:uid', placesControllers.getPlacesByUserId);
 
 // add a new place
 placesRouter.post('/', placesControllers.createPlace);
