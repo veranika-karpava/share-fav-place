@@ -19,7 +19,7 @@ placesRouter.get('/user/:uid', placesControllers.getPlacesByUserId);
 placesRouter.post('/', [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);
 
 // update a place by id(pid)
-placesRouter.patch('/:pid', placesControllers.updatePlaceById);
+placesRouter.patch('/:pid', [check('title').not().isEmpty(), check('description').isLength({ min: 5 })], placesControllers.updatePlaceById);
 
 // delete a place by id(pid)
 placesRouter.delete('/:pid', placesControllers.deletePlaceById);

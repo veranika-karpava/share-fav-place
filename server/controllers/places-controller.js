@@ -103,6 +103,12 @@ const createPlace = (req, res, next) => {
 
 // for updating place by id
 const updatePlaceById = (req, res, next) => {
+    // call validation
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log(errors);
+        throw new HttpError('Invalid inputs passed, please check your data', 422);
+    }
     const { title, description } = req.body;
     const placeId = req.params.pid
     // use spread operator to update copy of data at first, and when all data is updated, will update original
