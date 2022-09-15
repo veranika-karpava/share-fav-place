@@ -1,7 +1,5 @@
 const express = require('express');
-
-// import check method from express-validator
-const { check } = require('express-validator')
+const { check } = require('express-validator')// import check method from express-validator
 
 // import controller
 const placesControllers = require('../controllers/places-controller');

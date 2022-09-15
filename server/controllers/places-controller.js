@@ -1,8 +1,6 @@
-// file focus on middleware functions for places
-const { v4: uuid } = require('uuid');
+const { v4: uuid } = require('uuid'); // file focus on middleware functions for places
+const { validationResult } = require('express-validator'); // import result from express-validator
 
-// import result from express-validator
-const { validationResult } = require('express-validator')
 // import model for handling error
 const HttpError = require('../models/http-error');
 
@@ -126,6 +124,9 @@ const updatePlaceById = (req, res, next) => {
 // for delete place by id
 const deletePlaceById = (req, res, next) => {
     const placeId = req.params.pid;
+    if (!DUMMY_PLACES.find(place => place.id === placeId)) {
+        throw new HttpError('Could not find a place for that id', 404);
+    }
     DUMMY_PLACES = DUMMY_PLACES.filter(place => place.id !== placeId);
     res.status(200).json({ message: "Deleted place." })
 }
