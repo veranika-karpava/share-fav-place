@@ -1,6 +1,8 @@
 // file focus on middleware functions for places
 const { v4: uuid } = require('uuid');
 
+// import result from express-validator
+const { validationResult } = require('express-validator')
 // import model for handling error
 const HttpError = require('../models/http-error');
 
@@ -77,9 +79,14 @@ const getPlacesByUserId = (req, res, next) => {
 
 // middleware function for create new place
 const createPlace = (req, res, next) => {
+    // call validation
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log(errors);
+        throw new HttpError('Invalid inputs passed, please check your data', 422);
+    }
     // data that we recived from post request
     const { title, description, coordinates, address, creator } = req.body;
-
     const createdPlace = {
         id: uuid(),
         title,

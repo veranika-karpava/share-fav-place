@@ -1,5 +1,8 @@
 const express = require('express');
 
+// import check method from express-validator
+const { check } = require('express-validator')
+
 // import controller
 const placesControllers = require('../controllers/places-controller');
 
@@ -13,7 +16,7 @@ placesRouter.get('/:pid', placesControllers.getPlaceById);
 placesRouter.get('/user/:uid', placesControllers.getPlacesByUserId);
 
 // add a new place
-placesRouter.post('/', placesControllers.createPlace);
+placesRouter.post('/', [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);
 
 // update a place by id(pid)
 placesRouter.patch('/:pid', placesControllers.updatePlaceById);
