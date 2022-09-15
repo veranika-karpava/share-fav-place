@@ -4,6 +4,7 @@ const PORT = 8080;
 
 //can use as a middleware everything from this object
 const placesRouter = require('./routes/places');
+const usersRouter = require('./routes/users');
 const HttpError = require('./models/http-error');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 // registrate middleware for place router
 // express.js will forward requests to our places routes middleware if their path starts with /api/places
 app.use('/api/places', placesRouter);
+app.use('/api/users', usersRouter);
 
 // for unsupported routes - registarte middleware that only is reached when some request doesn't have response before
 app.use((req, res, next) => {
