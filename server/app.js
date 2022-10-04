@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');// parse body from incoming request
-const PORT = 8080;
+const mongoose = require('mongoose');
+const PORT = 8080 || 5050;
 
 //can use as a middleware everything from this object
 const placesRouter = require('./routes/places');
@@ -37,7 +38,17 @@ app.use((error, req, res, next) => {
         .json({ message: error.message || "An unknown error occured" })
 })
 
-// listen port
-app.listen(PORT, () => {
-    console.log(`🚀 Server listening on ${PORT}`)
-})
+// connect with database and listen port
+mongoose
+    .connect('mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lhybrvz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority')
+    .then(() => {
+        // if connection with db is succeseful, the port is listened
+        app.listen(PORT, () => {
+            console.log(`🚀 Server listening on ${PORT}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+
