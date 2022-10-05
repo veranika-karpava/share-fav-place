@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator'); // import result from
 
 // import model for handling error
 const HttpError = require('../models/http-error');
+// import place model
 const Place = require('../models/place');
 const getCoordForAddress = require('../util/location');
 
@@ -34,11 +35,22 @@ let DUMMY_PLACES = [
     }
 ]
 // function for getting a specific place by place id(pid)
-const getPlaceById = (req, res, next) => {
+const getPlaceById = async (req, res, next) => {
     const placeId = req.params.pid //{ pid: 'p1'}
-    const place = DUMMY_PLACES.find(place => {
-        return place.id === placeId;
-    })
+    let place;
+
+    try {
+        place = await Place.findById(placeId);
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not find a place', 500);
+        return next(error);
+    }
+
+    // findId doesn't return real promise
+
+    // const place = DUMMY_PLACES.find(place => {
+    //     return place.id === placeId;
+    // })
     if (!place) {
         // 1) use status method to send status code and message:
         // return res
@@ -51,15 +63,26 @@ const getPlaceById = (req, res, next) => {
         // throw error;
 
         // 3) use class function for error handling
-        throw new HttpError('Could not find a place for the provided id.', 404);
+        const error = new HttpError('Could not find a place for the provided id.', 404);
+        return next(error)
     }
-    res.json({ place: place })
+    res.json({ place: place.toObject({ getters: true }) }) //=> { place } =>{ place: place }
 };
 
 // function for retrieving list of all places for given user id(uid)
-const getPlacesByUserId = (req, res, next) => {
+const getPlacesByUserId = async (req, res, next) => {
     const userId = req.params.uid // { uid: 'u1'}
-    const places = DUMMY_PLACES.filter((place) => place.creator === userId);
+    let places;
+
+    try {
+        places = await Place.find({ creator: userId })
+    } catch (err) {
+        const error = new HttpError('Fetching places failed, please try again later', 500);
+        return next(error);
+    }
+
+    // const places = DUMMY_PLACES.filter((place) => place.creator === userId);
+
     if (!places || places.length === 0) {
         // 1) use status method to send status code and message
         // return res
@@ -75,10 +98,10 @@ const getPlacesByUserId = (req, res, next) => {
         return next(new HttpError('Could not find a place for the provided user id.', 404));
     }
 
-    res.json({ places: places });
+    res.json({ places: places.map(place => place.toObject({ getters: true })) });
 };
 
-// middleware function for create new place
+// middleware function for create a new place
 const createPlace = async (req, res, next) => {
     // call validation
     const errors = validationResult(req);
@@ -95,7 +118,7 @@ const createPlace = async (req, res, next) => {
         return next(error)
     }
 
-
+    // create place with no database 
     // const createdPlace = {
     //     id: uuid(),
     //     title,
@@ -104,6 +127,8 @@ const createPlace = async (req, res, next) => {
     //     address,
     //     creator
     // };
+
+
     // create new place by using model 
     const createdPlace = new Place({
         title,
