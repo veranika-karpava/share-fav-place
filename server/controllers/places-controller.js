@@ -8,32 +8,32 @@ const Place = require('../models/place');
 const getCoordForAddress = require('../util/location');
 
 
-let DUMMY_PLACES = [
-    {
-        id: 'p1',
-        title: 'Empire State Building',
-        description: 'One of the most famous sky scrapers in the world!',
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-        address: '20 W 34th St, New York, NY 10001',
-        location: {
-            lat: 40.7484405,
-            lng: -73.9878584
-        },
-        creator: 'u1'
-    },
-    {
-        id: 'p1',
-        title: 'Empire',
-        description: 'One of the most famous sky scrapers in the world!',
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-        address: '20 W 34th St, New York, NY 10001',
-        location: {
-            lat: 40.7484405,
-            lng: -73.9878584
-        },
-        creator: 'u1'
-    }
-]
+// let DUMMY_PLACES = [
+//     {
+//         id: 'p1',
+//         title: 'Empire State Building',
+//         description: 'One of the most famous sky scrapers in the world!',
+//         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+//         address: '20 W 34th St, New York, NY 10001',
+//         location: {
+//             lat: 40.7484405,
+//             lng: -73.9878584
+//         },
+//         creator: 'u1'
+//     },
+//     {
+//         id: 'p1',
+//         title: 'Empire',
+//         description: 'One of the most famous sky scrapers in the world!',
+//         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+//         address: '20 W 34th St, New York, NY 10001',
+//         location: {
+//             lat: 40.7484405,
+//             lng: -73.9878584
+//         },
+//         creator: 'u1'
+//     }
+// ]
 // function for getting a specific place by place id(pid)
 const getPlaceById = async (req, res, next) => {
     const placeId = req.params.pid //{ pid: 'p1'}
@@ -162,6 +162,8 @@ const updatePlaceById = async (req, res, next) => {
     // updatedPlace.title = title;
     // updatedPlace.description = description;
     // DUMMY_PLACES[placeIndex] = updatedPlace;
+
+
     place.title = title;
     place.description = description;
     try {
@@ -181,14 +183,7 @@ const deletePlaceById = async (req, res, next) => {
     let place;
 
     try {
-        place = await Place.findById(placeId)
-    } catch (err) {
-        const error = new HttpError('Something went wrong, could not update place.', 500);
-        return next(error);
-    }
-
-    try {
-        await place.remove();
+        place = await Place.findByIdAndRemove(placeId)
     } catch (err) {
         const error = new HttpError('Something went wrong, could not delete place.', 500);
         return next(error);
