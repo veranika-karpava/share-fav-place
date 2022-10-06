@@ -135,7 +135,7 @@ const createPlace = async (req, res, next) => {
         const error = new HttpError('Creating place failed, please try again.', 500);
         return next(error);
     }
-    res.status(201).json({ place: createdPlace })
+    res.status(201).json({ place: createdPlace.toObject({ getters: true }) })
 }
 
 // for updating place by id
@@ -143,7 +143,7 @@ const updatePlaceById = async (req, res, next) => {
     // call validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        throw new HttpError('Invalid inputs passed, please check your data', 422);
+        return next(new HttpError('Invalid inputs passed, please check your data', 422));
     }
     const { title, description } = req.body;
     const placeId = req.params.pid
@@ -162,7 +162,6 @@ const updatePlaceById = async (req, res, next) => {
     // updatedPlace.title = title;
     // updatedPlace.description = description;
     // DUMMY_PLACES[placeIndex] = updatedPlace;
-
 
     place.title = title;
     place.description = description;
