@@ -14,8 +14,15 @@ const DUMMY_USERS = [
 ]
 
 
-const getUsers = (req, res, next) => {
-    res.json({ users: DUMMY_USERS })
+const getUsers = async (req, res, next) => {
+    let users;
+    try {
+        users = await User.find({}, 'email name'); // or '-password'
+    } catch (err) {
+        return next(new HttpError('Fetching users failed, please try again later.', 500))
+    }
+    res.json({ users: users.map(user => user.toObject({ getters: true })) })
+    // res.json({ users: DUMMY_USERS })
 }
 
 
@@ -78,11 +85,9 @@ const logIn = async (req, res, next) => {
         return next(new HttpError('Logging in failed, please try again later.', 500))
     }
 
-
-
-
-
-
+    if (!existingUser || existingUser.password !== password) {
+        return next(new HttpError('Invalid credentials, could not log you in.', 401))
+    }
     // const indetifiedUser = DUMMY_USERS.find(user => user.email === email);
     // if (!indetifiedUser || indetifiedUser.password === password) {
     //     throw new HttpError('Could not indentify user, credentials seem to be wrong', 401)
