@@ -1,10 +1,12 @@
 const { v4: uuid } = require('uuid'); // file focus on middleware functions for places
 const { validationResult } = require('express-validator'); // import result from express-validator
+const mongoose = require('mongoose');
 
 // import error model for handling error
 const HttpError = require('../models/http-error');
 // import place model from models file
 const Place = require('../models/place');
+const User = require('../models/user');
 const getCoordForAddress = require('../util/location');
 
 
@@ -127,15 +129,45 @@ const createPlace = async (req, res, next) => {
         creator
     });
 
+    //find user that created a new place
+    let user;
     try {
-        // save in mongo db
-        await createdPlace.save();
+        user = await User.findById(creator);
+    } catch (err) {
+        return next(new HttpError('Creating place failed, please try again', 500))
+    }
+
+    // check user exists or not
+    if (!user) {
+        return next(new HttpError('Could not find user for provided id', 404))
+    }
+
+    try {
+        // create session - start session when we want to create a place
+        const sess = await mongoose.startSession();
+        // transactions - allows to perform multiple operations in isolation of each other
+        // start transaction in the current session. It's build in session. When the transaction is succefully, the session is finished
+        sess.startTransaction();
+
+        // place created w/t unique id and stored  on the current session
+        await createdPlace.save({ session: sess });
+
+        // grabs the created place id and adds it to the place field of the user.
+        // push - is a method used by mongoose, which kind of allows Mongoose to, behind the scene,establish the connection between the two models we are referring to here.
+        // 
+        user.places.push(createdPlace);
+
+        // save in users collection
+        await user.save({ session: sess });
+
+        // the session commits the transactions
+        await sess.commitTransaction();
     }
     catch (err) {
         const error = new HttpError('Creating place failed, please try again.', 500);
         return next(error);
     }
-    res.status(201).json({ place: createdPlace.toObject({ getters: true }) })
+    res.status(201).json({ place: createdPlace })
 }
 
 // for updating place by id
