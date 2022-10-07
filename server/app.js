@@ -1,9 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');// parse body from incoming request
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');// parse body from incoming request
 const PORT = 8080 || 5050;
 
-//can use as a middleware everything from this object
 const placesRouter = require('./routes/places');
 const usersRouter = require('./routes/users');
 const HttpError = require('./models/http-error');
