@@ -12,7 +12,10 @@ const placeSchema = new Schema({
         lat: { type: Number, required: true },
         lng: { type: Number, required: true }
     },
-    creator: { type: String, required: true }
+    //  acces to the ObjectId type - special type used for unique indentifiers;
+    // ref  - "String"| "Model"| "Function" - Set the model that this path refers to. This is the option that populate looks at to determine the foreign collection it should query
+    // {}  - place has only one user
+    creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 })
 
 module.exports = mongoose.model('Place', placeSchema);
