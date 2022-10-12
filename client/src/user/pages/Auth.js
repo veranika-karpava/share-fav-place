@@ -29,18 +29,42 @@ const Auth = () => {
 
     const switchModeHandler = () => {
         if (!isLoginMode) {
-            setFormData({ ...formState.inputs, username: undefined }, formState.inputs.email.isValid && formState.inputs.password.isValid);
+            setFormData({ ...formState.inputs, name: undefined }, formState.inputs.email.isValid && formState.inputs.password.isValid);
             // for log in form
         } else {
-            setFormData({ ...formState.inputs, username: { value: '', isValid: false } }, false)
+            setFormData({ ...formState.inputs, name: { value: '', isValid: false } }, false)
             //for sign up form
         }
         setIsLoginMode(prevMode => !prevMode)
     }
 
-    const authSubmitHandler = (e) => {
+    const authSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log(formState.inputs);
+        if (isLoginMode) {
+
+        } else {
+            try {
+                // fetch() is provided JS. it starts the process of fetching a resource from server and returns promises
+                const response = await fetch('http://localhost:5050/api/users/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: formState.inputs.name.value,
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+                console.log(responseData)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+
+        // console.log(formState.inputs.username.value);
         auth.login();
     }
 
@@ -52,10 +76,10 @@ const Auth = () => {
                 <form className='user-auth__form' onSubmit={authSubmitHandler}>
                     {!isLoginMode &&
                         (<Input
-                            id='username'
+                            id='name'
                             element='input'
                             type='text'
-                            label='Username'
+                            label='Name'
                             placeholder='Please enter your Username'
                             validators={[VALIDATOR_REQUIRE()]}
                             errorText='Please enter an Username' onInput={inputHandler} />

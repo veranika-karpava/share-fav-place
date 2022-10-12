@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');// parse body from incoming request
-const PORT = 8080 || 5050;
+const PORT = 5050;
 
 const placesRouter = require('./routes/places');
 const usersRouter = require('./routes/users');
@@ -11,6 +11,21 @@ const app = express();
 
 // registrate middleware to parse body. it should be before router middleware, because need to parse data and then router. Now we could use data from post request in function 
 app.use(bodyParser.json());
+
+// handling CORS error
+app.use((req, res, next) => {
+    // force the browser
+    // * allows any domain to send request
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // controlls which headers these requests sent by the browser may have
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    );
+    // controlls which HTTP methods may be used on front end
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+    next()
+});
 
 // registrate middleware for place router
 // express.js will forward requests to our places routes middleware if their path starts with /api/places
