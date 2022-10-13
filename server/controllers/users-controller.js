@@ -9,7 +9,7 @@ const getUsers = async (req, res, next) => {
     // res.json({ users: DUMMY_USERS })
     let users;
     try {
-        users = await User.find({}, 'email name'); // or '-password'
+        users = await User.find({}, '-password'); // or '-password'
     } catch (err) {
         return next(new HttpError('Fetching users failed, please try again later.', 500))
     }

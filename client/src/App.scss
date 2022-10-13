@@ -61,7 +61,8 @@ h3 {
     transition: all 200ms;
 }
 
-.user-places {
+.user-places,
+.users__container-loading {
     @include flex(center, center, column, nowrap);
 
     @include tablet {
