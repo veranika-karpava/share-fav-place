@@ -10,7 +10,6 @@ import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../s
 import { useForm } from '../../shared/hooks/form-hooks';
 import { AuthContext } from '../../shared/contex/auth_context';
 
-
 const Auth = () => {
     const auth = useContext(AuthContext);
     const [isLoginMode, setIsLoginMode] = useState(true);
@@ -44,7 +43,30 @@ const Auth = () => {
 
     const authSubmitHandler = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         if (isLoginMode) {
+            try {
+                const response = await fetch('http://localhost:5050/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+                if (!response.ok) {
+                    throw new Error(responseData.message)
+                }
+                setIsLoading(false);
+                auth.login();
+            } catch (err) {
+                setIsLoading(false);
+                setError(err.message || 'Something went wrong, please try again.')
+            }
+
         } else {
             try {
                 setIsLoading(true);
@@ -65,14 +87,11 @@ const Auth = () => {
                 if (!response.ok) {
                     throw new Error(responseData.message)
                 }
-                console.log(responseData);
                 setIsLoading(false);
                 auth.login();
             } catch (err) {
                 setIsLoading(false);
                 setError(err.message || 'Something went wrong, please try again.')
-                console.log(err)
-
             }
         }
     }
@@ -80,6 +99,8 @@ const Auth = () => {
     const errorHandler = () => {
         setError(null)
     }
+
+
     return (
         <section className='user-auth'>
             <ErrorModal error={error} onClear={errorHandler} />
