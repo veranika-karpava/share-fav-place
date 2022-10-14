@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+// gives you access to the history instance that you may use to navigate. For rediction to another page
+import { useHistory } from 'react-router-dom';
 
 import './PlaceForm.scss';
 import { useForm } from '../../shared/hooks/form-hooks';
-import Input from '../../shared/components/Input/Input';
-import Button from '../../shared/components/Button/Button'
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import { AuthContext } from '../../shared/contex/auth_context';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
-
+import Input from '../../shared/components/Input/Input';
+import Button from '../../shared/components/Button/Button';
+import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
+import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 
 const NewPlace = () => {
+    const auth = useContext(AuthContext); // access the managing states
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [formState, inputHandler] = useForm(
         {
             title: {
@@ -25,14 +32,32 @@ const NewPlace = () => {
         }
     )
 
-    const placeSubmitHandler = (e) => {
+    const history = useHistory()
+
+    const placeSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log(formState.inputs)// send to back end server
+        try {
+            await sendRequest(
+                'http://localhost:5050/api/places',
+                'POST',
+                JSON.stringify({
+                    title: formState.inputs.title.value,
+                    description: formState.inputs.description.value,
+                    address: formState.inputs.address.value,
+                    creator: auth.userId
+                }),
+                { 'Content-Type': 'application/json' }
+            );
+            // redirect to main page
+            history.push('/');
+        } catch (err) { }
     }
 
     return (
         <section className='place-form'>
+            <ErrorModal error={error} onClear={clearError} />
             <form className='place-form__form'>
+                {isLoading && <LoadingSpinner asOverlay />}
                 <Input id='title' element="input" type="text" label="Title" errorText='Please enter a valid title.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
                 <Input id='description' element='textarea' label="Description" errorText='Please enter a valid description (at least 5 characters).' validators={[VALIDATOR_MINLENGTH(5)]} onInput={inputHandler} />
                 <Input id='address' element='input' label="Address" errorText='Please enter a valid address.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />

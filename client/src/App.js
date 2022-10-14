@@ -12,13 +12,16 @@ import { AuthContext } from './shared/contex/auth_context';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false)
 
-  const login = useCallback(() => {
-    setIsLoggedIn(true)
+  const login = useCallback((uid) => {
+    setIsLoggedIn(true);
+    setUserId(uid)
   }, []);
 
   const logout = useCallback(() => {
-    setIsLoggedIn(false)
+    setIsLoggedIn(false);
+    setUserId(null)
   }, []);
 
   let routes;
@@ -61,7 +64,7 @@ const App = () => {
   }
 
 
-  return <AuthContext.Provider value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}>
+  return <AuthContext.Provider value={{ isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout }}>
     <BrowserRouter>
       {/* it means that app use router that will display in url  */}
       <MainHeader />
