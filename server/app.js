@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');// parse body from incoming request
@@ -11,6 +13,9 @@ const app = express();
 
 // registrate middleware to parse body. it should be before router middleware, because need to parse data and then router. Now we could use data from post request in function 
 app.use(bodyParser.json());
+
+// middleware for access image
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 // handling CORS error
 app.use((req, res, next) => {
@@ -27,6 +32,7 @@ app.use((req, res, next) => {
     next()
 });
 
+
 // registrate middleware for place router
 // express.js will forward requests to our places routes middleware if their path starts with /api/places
 app.use('/api/places', placesRouter);
@@ -42,6 +48,13 @@ app.use((req, res, next) => {
 // registrate middleware for catch error
 // default error handler
 app.use((error, req, res, next) => {
+    // if error, it check and don't add image to folder
+    if (req.file) {
+        // unlink() - delete file
+        fs.unlink(req.file.path, (err) => {
+            console.log(err)
+        });
+    }
     // check if a response has alredy been sent, if yes that means that we didn't sent response by our own
     if (res.headerSent) {
         return next(error);

@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
+const PORT = 5050;
 
 // function for getting list of users
 const getUsers = async (req, res, next) => {
@@ -52,7 +53,7 @@ const signUp = async (req, res, next) => {
     const createdUser = new User({
         name,
         email,
-        image: '/image/photo1.jpg',
+        image: req.file.path,
         password,
         places: []
     });
