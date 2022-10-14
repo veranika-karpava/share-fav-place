@@ -26,7 +26,7 @@ const Users = () => {
     return (
         <section className='users'>
             <ErrorModal error={error} onClear={clearError} />
-            {isLoading && <div className='users__container-loading'><LoadingSpinner /></div>}
+            {isLoading && <div className='message__container-loading'><LoadingSpinner /></div>}
             {!isLoading && loadedUsers && <UserList users={loadedUsers} />}
         </section>
     );

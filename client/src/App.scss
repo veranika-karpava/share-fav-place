@@ -62,7 +62,7 @@ h3 {
 }
 
 .user-places,
-.users__container-loading {
+.message__container-loading {
     @include flex(center, center, column, nowrap);
 
     @include tablet {

@@ -28,7 +28,7 @@ const UserPlaces = () => {
     return (
         <section className='user-places'>
             <ErrorModal error={error} onClear={clearError} />
-            {isLoading && <div className='users__container-loading'><LoadingSpinner /></div>}
+            {isLoading && <div className='message__container-loading'><LoadingSpinner /></div>}
             {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} />}
         </section>
     );
