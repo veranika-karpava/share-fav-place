@@ -13,7 +13,7 @@ const NavLinks = () => {
                 <NavLink to='/' exact className='header__nav-link'>All Users</NavLink>
             </li>
             {auth.isLoggedIn && (<li className='header__nav-item'>
-                <NavLink to='/u1/places' className='header__nav-link'>My Places</NavLink>
+                <NavLink to={`/${auth.userId}/places`} className='header__nav-link'>My Places</NavLink>
             </li>)}
             {auth.isLoggedIn && (<li className='header__nav-item'>
                 <NavLink to='/places/new' className='header__nav-link'>Add Place</NavLink>

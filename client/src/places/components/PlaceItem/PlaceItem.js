@@ -78,7 +78,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                     </div>
                     <div className='user-places__actions'>
                         <Button inverse onClick={openMapHandler} > MAP </Button>
-                        {auth.isLoggedIn &&
+                        {auth.userId === creatorId &&
                             <>
                                 <Button to={`/places/${id}`} > EDIT </Button>
                                 <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>

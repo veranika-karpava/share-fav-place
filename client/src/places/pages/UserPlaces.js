@@ -6,9 +6,6 @@ import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-
-
-
 const UserPlaces = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedPlaces, setLoadedPlaces] = useState();
