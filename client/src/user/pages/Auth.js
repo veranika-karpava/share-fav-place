@@ -33,10 +33,10 @@ const Auth = () => {
 
     const switchModeHandler = () => {
         if (!isLoginMode) {
-            setFormData({ ...formState.inputs, name: undefined }, formState.inputs.email.isValid && formState.inputs.password.isValid);
+            setFormData({ ...formState.inputs, name: undefined, image: undefined }, formState.inputs.email.isValid && formState.inputs.password.isValid);
             // for log in form
         } else {
-            setFormData({ ...formState.inputs, name: { value: '', isValid: false } }, false)
+            setFormData({ ...formState.inputs, name: { value: '', isValid: false }, image: { value: null, isValid: false } }, false)
             //for sign up form
         }
         setIsLoginMode(prevMode => !prevMode)
@@ -44,6 +44,9 @@ const Auth = () => {
 
     const authSubmitHandler = async event => {
         event.preventDefault();
+
+        console.log(formState.inputs)
+
 
         if (isLoginMode) {
             try {
@@ -98,7 +101,7 @@ const Auth = () => {
                             validators={[VALIDATOR_REQUIRE()]}
                             errorText='Please enter an Username' onInput={inputHandler} />
                         )}
-                    {!isLoginMode && <ImageUpload id='image' center />}
+                    {!isLoginMode && <ImageUpload id='image' center onInput={inputHandler} />}
                     <Input
                         id='email'
                         element='input'
