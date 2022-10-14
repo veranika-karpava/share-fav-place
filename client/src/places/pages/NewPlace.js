@@ -14,6 +14,7 @@ import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinne
 
 const NewPlace = () => {
     const auth = useContext(AuthContext); // access the managing states
+    const history = useHistory();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [formState, inputHandler] = useForm(
         {
@@ -32,7 +33,7 @@ const NewPlace = () => {
         }
     )
 
-    const history = useHistory()
+
 
     const placeSubmitHandler = async (e) => {
         e.preventDefault();
