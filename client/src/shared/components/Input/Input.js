@@ -48,16 +48,16 @@ const Input = ({ element, type, id, placeholder, rows, label, errorText, validat
 
     const elementForm = element === 'input'
         ?
-        (<input id={id} type={type} placeholder={placeholder} className='form-place__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />)
+        (<input id={id} type={type} placeholder={placeholder} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />)
         :
-        (<textarea id={id} rows={rows || 3} className='form-place__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />
+        (<textarea id={id} rows={rows || 3} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />
         );
 
     return (
-        <div className={`form-place__container ${!inputState.isValid && inputState.isTouched && 'form-place__container--invalid'}`}>
-            <label htmlFor={id} className='form-place__label'>{label}</label>
+        <div className={`form__container ${!inputState.isValid && inputState.isTouched && 'form__container--invalid'}`}>
+            <label htmlFor={id} className='form__label'>{label}</label>
             {elementForm}
-            {!inputState.isValid && inputState.isTouched && <p className='form-place__error-message'>{errorText}</p>}
+            {!inputState.isValid && inputState.isTouched && <p className='form__error-message'>{errorText}</p>}
         </div>
     );
 };

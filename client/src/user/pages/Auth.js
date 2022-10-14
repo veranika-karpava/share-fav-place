@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import './Auth.scss';
+import ImageUpload from '../../shared/components/ImageUpload/ImageUpload';
 import Card from '../../shared/components/Card/Card';
 import Input from '../../shared/components/Input/Input';
 import Button from '../../shared/components/Button/Button';
@@ -97,6 +98,7 @@ const Auth = () => {
                             validators={[VALIDATOR_REQUIRE()]}
                             errorText='Please enter an Username' onInput={inputHandler} />
                         )}
+                    {!isLoginMode && <ImageUpload id='image' center />}
                     <Input
                         id='email'
                         element='input'
