@@ -5,10 +5,14 @@ import Card from '../../../shared/components/Card/Card';
 import Button from '../../../shared/components/Button/Button';
 import Modal from '../../../shared/components/Modal/Modal';
 import Map from '../../../shared/components/Map/Map';
+import ErrorModal from '../../../shared/components/ErrorModal/ErrorModal';
+import LoadingSpinner from '../../../shared/components/LoadingSpinner/LoadingSpinner';
 import { AuthContext } from '../../../shared/contex/auth_context';
+import { useHttpClient } from '../../../shared/hooks/http-hook';
 
-const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates }) => {
+const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates, onDelete }) => {
     const auth = useContext(AuthContext);
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [showMap, setShowMap] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -25,14 +29,21 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
         setShowConfirmModal(false)
     }
 
-    const confirmDeleteHandler = () => {
-        setShowConfirmModal(false)
-        console.log('Delete')
+    const confirmDeleteHandler = async () => {
+        setShowConfirmModal(false);
+        try {
+            await sendRequest(
+                `http://localhost:5050/api/places/${id}`,
+                'DELETE'
+            );
+            onDelete(id);
+        } catch (err) { }
     }
 
 
     return (
         <>
+            <ErrorModal error={error} onClear={clearError} />
             <Modal
                 show={showMap}
                 onCancel={closeMapHandler}
@@ -56,6 +67,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
 
             <li className='user-places__item'>
                 <Card className='user-places__card'>
+                    {isLoading && <LoadingSpinner asOverlay />}
                     <div className='user-places__view'>
                         <img src={image} alt={title} className='user-places__image' />
                     </div>

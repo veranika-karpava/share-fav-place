@@ -6,7 +6,7 @@ import PlaceItem from '../PlaceItem/PlaceItem';
 import Button from '../../../shared/components/Button/Button';
 
 
-const PlaceList = ({ items }) => {
+const PlaceList = ({ items, onDeletePlace }) => {
     if (items.length === 0) {
         return <div className='message'>
             <Card>
@@ -26,7 +26,8 @@ const PlaceList = ({ items }) => {
                     description={place.description}
                     address={place.address}
                     creatorId={place.creator}
-                    coordinates={place.location} />)}
+                    coordinates={place.location}
+                    onDelete={onDeletePlace} />)}
         </ul>
     );
 };
