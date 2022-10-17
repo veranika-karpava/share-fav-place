@@ -11,6 +11,7 @@ import Input from '../../shared/components/Input/Input';
 import Button from '../../shared/components/Button/Button';
 import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
+import ImageUpload from '../../shared/components/ImageUpload/ImageUpload';
 
 const NewPlace = () => {
     const auth = useContext(AuthContext); // access the managing states
@@ -29,26 +30,29 @@ const NewPlace = () => {
             address: {
                 value: '',
                 isValid: false
+            },
+            image: {
+                value: null,
+                isValid: false
             }
         }
     )
 
 
-
     const placeSubmitHandler = async (e) => {
         e.preventDefault();
         try {
+            const formData = new FormData();
+            formData.append('title', formState.inputs.title.value);
+            formData.append('description', formState.inputs.description.value);
+            formData.append('address', formState.inputs.address.value);
+            formData.append('creator', auth.userId);
+            formData.append('image', formState.inputs.image.value);
+
             await sendRequest(
                 'http://localhost:5050/api/places',
                 'POST',
-                JSON.stringify({
-                    title: formState.inputs.title.value,
-                    description: formState.inputs.description.value,
-                    address: formState.inputs.address.value,
-                    creator: auth.userId
-                }),
-                { 'Content-Type': 'application/json' }
-            );
+                formData);
             // redirect to main page
             history.push('/');
         } catch (err) { }
@@ -59,9 +63,35 @@ const NewPlace = () => {
             <ErrorModal error={error} onClear={clearError} />
             <form className='place-form__form'>
                 {isLoading && <LoadingSpinner asOverlay />}
-                <Input id='title' element="input" type="text" label="Title" errorText='Please enter a valid title.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
-                <Input id='description' element='textarea' label="Description" errorText='Please enter a valid description (at least 5 characters).' validators={[VALIDATOR_MINLENGTH(5)]} onInput={inputHandler} />
-                <Input id='address' element='input' label="Address" errorText='Please enter a valid address.' validators={[VALIDATOR_REQUIRE()]} onInput={inputHandler} />
+                <Input
+                    id='title'
+                    element="input"
+                    type="text"
+                    label="Title"
+                    errorText='Please enter a valid title.'
+                    validators={[VALIDATOR_REQUIRE()]}
+                    onInput={inputHandler} />
+
+                <Input
+                    id='description'
+                    element='textarea'
+                    label="Description"
+                    errorText='Please enter a valid description (at least 5 characters).'
+                    validators={[VALIDATOR_MINLENGTH(5)]}
+                    onInput={inputHandler} />
+
+                <Input
+                    id='address'
+                    element='input'
+                    label="Address"
+                    errorText='Please enter a valid address.'
+                    validators={[VALIDATOR_REQUIRE()]}
+                    onInput={inputHandler} />
+                <ImageUpload center
+                    id='image'
+                    onInput={inputHandler}
+                    errorText='Please provide an image' />
+
                 <Button type="submit" disabled={!formState.isValid} onClick={placeSubmitHandler}>ADD PLACE</Button>
             </form>
         </section>

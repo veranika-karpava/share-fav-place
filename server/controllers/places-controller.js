@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { v4: uuid } = require('uuid'); // file focus on middleware functions for places
 const { validationResult } = require('express-validator'); // import result from express-validator
 const mongoose = require('mongoose');
@@ -107,7 +108,7 @@ const createPlace = async (req, res, next) => {
         description,
         address,
         location: coordinates,
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+        image: req.file.path,
         creator
     });
 
@@ -217,6 +218,11 @@ const deletePlaceById = async (req, res, next) => {
         return next(new HttpError('Could not find place for this is id', 404));
     }
 
+    // image path
+
+    const imagePath = place.image;
+
+
     try {
         const sess = await mongoose.startSession();
         sess.startTransaction();
@@ -227,6 +233,10 @@ const deletePlaceById = async (req, res, next) => {
     } catch (err) {
         return next(new HttpError('Something went wrong, could not delete place.', 500))
     }
+
+    fs.unlink(imagePath, err => {
+        console.log(err)
+    })
 
     res.status(200).json({ message: "Deleted place." })
 }

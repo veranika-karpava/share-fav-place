@@ -69,7 +69,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                 <Card className='user-places__card'>
                     {isLoading && <LoadingSpinner asOverlay />}
                     <div className='user-places__view'>
-                        <img src={image} alt={title} className='user-places__image' />
+                        <img src={`http://localhost:5050/${image}`} alt={title} className='user-places__image' />
                     </div>
                     <div className='user-places__info'>
                         <h2 className='user-places__name'>{title}</h2>

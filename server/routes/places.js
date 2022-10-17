@@ -1,8 +1,11 @@
 const express = require('express');
 const { check } = require('express-validator')// import check method from express-validator
 
+
 // import controller
 const placesControllers = require('../controllers/places-controller');
+// import obj with different middlewares
+const fileUpload = require('../middleware/file-upload');
 
 // create our router
 const placesRouter = express.Router();
@@ -14,7 +17,7 @@ placesRouter.get('/:pid', placesControllers.getPlaceById);
 placesRouter.get('/user/:uid', placesControllers.getPlacesByUserId);
 
 // add a new place
-placesRouter.post('/', [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);
+placesRouter.post('/', fileUpload.single('image'), [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);
 
 // update a place by id(pid)
 placesRouter.patch('/:pid', [check('title').not().isEmpty(), check('description').isLength({ min: 5 })], placesControllers.updatePlaceById);
