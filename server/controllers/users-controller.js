@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { v4: uuid } = require('uuid');
 const { validationResult } = require('express-validator');
 
@@ -74,7 +75,21 @@ const signUp = async (req, res, next) => {
         return next(new HttpError('Signing up failed, please try again', 500))
     }
 
-    res.status(201).json({ user: createdUser.toObject({ getters: true }) });
+    // generate jwt token
+    let token;
+    try {
+        token = jwt.sign(
+            { userId: createdUser.id, email: createdUser.email },
+            'JWT_KEY',
+            { expiresIn: '1h' }
+        );
+    } catch (err) {
+        return next(new HttpError('Signing up failed, please try again', 500));
+    }
+
+
+
+    res.status(201).json({ userId: createdUser.id, email: createdUser.email, token: token });
 }
 
 // function for posting logging in users
@@ -87,32 +102,43 @@ const logIn = async (req, res, next) => {
 
     let existingUser;
     try {
-        existingUser = await User.findOne({ email: email })
+        existingUser = await User.findOne({ email: email });
     } catch (err) {
-        return next(new HttpError('Logging in failed, please try again later.', 500))
+        return next(new HttpError('Logging in failed, please try again later.', 500));
     }
-
-
-
     if (!existingUser) {
-        return next(new HttpError('Invalid credentials, could not log you in.', 401))
+        return next(new HttpError('Invalid credentials, could not log you in.', 401));
     }
 
     let isValidPassword = false;
+
     try {
         isValidPassword = await bcrypt.compare(password, existingUser.password);
     } catch (err) {
-        return next(new HttpError('Could not log you in, please check you credentials and try again.', 500))
+        return next(new HttpError('Could not log you in, please check you credentials and try again.', 500));
     }
 
     if (!isValidPassword) {
-        return next(new HttpError('Invalid credentials, could not log you in.', 401))
+        return next(new HttpError('Invalid credentials, could not log you in.', 401));
+    }
+
+    // generate jwt token
+    let token;
+    try {
+        token = jwt.sign(
+            { userId: existingUser.id, email: existingUser.email },
+            'JWT_KEY',
+            { expiresIn: '1h' }
+        );
+    } catch (err) {
+        return next(new HttpError('Logging in failed, please try again', 500));
     }
 
     res.json({
-        message: 'Logged in',
-        user: existingUser.toObject({ getters: true })
-    })
+        userId: existingUser.id,
+        email: existingUser.email,
+        token: token
+    });
 }
 
 exports.getUsers = getUsers;

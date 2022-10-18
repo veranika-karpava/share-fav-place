@@ -6,6 +6,7 @@ import './PlaceForm.scss';
 import { useForm } from '../../shared/hooks/form-hooks';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/contex/auth_context';
+
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 import Input from '../../shared/components/Input/Input';
 import Button from '../../shared/components/Button/Button';
@@ -52,8 +53,9 @@ const NewPlace = () => {
             await sendRequest(
                 'http://localhost:5050/api/places',
                 'POST',
-                formData);
-            // redirect to main page
+                formData,
+                { Authorization: 'Bearer ' + auth.token });
+            // redirect to main page 
             history.push('/');
         } catch (err) { }
     }

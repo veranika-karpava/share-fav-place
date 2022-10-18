@@ -45,9 +45,6 @@ const Auth = () => {
     const authSubmitHandler = async event => {
         event.preventDefault();
 
-        console.log(formState.inputs)
-
-
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
@@ -61,7 +58,7 @@ const Auth = () => {
                         'Content-Type': 'application/json'
                     }
                 );
-                auth.login(responseData.user.id);
+                auth.login(responseData.userId, responseData.token);
             } catch (err) { }
         } else {
             try {
@@ -76,12 +73,10 @@ const Auth = () => {
                     // couldn't JSON.stringify - because image is binary data
                     formData
                 );
-
-                auth.login(responseData.user.id);
+                auth.login(responseData.userId, responseData.token);
             } catch (err) { }
         }
     };
-
 
     return (
         <section className='user-auth'>
