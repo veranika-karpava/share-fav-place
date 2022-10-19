@@ -34,7 +34,9 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
         try {
             await sendRequest(
                 `http://localhost:5050/api/places/${id}`,
-                'DELETE'
+                'DELETE',
+                null,
+                { Authorization: 'Bearer ' + auth.token }
             );
             onDelete(id);
         } catch (err) { }
