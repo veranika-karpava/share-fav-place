@@ -19,8 +19,10 @@ const App = () => {
 
   const login = useCallback((uid, token) => {
     // setIsLoggedIn(true);
-    setToken(token)
-    setUserId(uid)
+    setToken(token);
+    setUserId(uid);
+    // store our token in local storage
+    localStorage.setItem('userData', JSON.stringify({ userId: uid, token: token }))
   }, []);
 
   const logout = useCallback(() => {
