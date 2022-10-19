@@ -107,7 +107,7 @@ const logIn = async (req, res, next) => {
         return next(new HttpError('Logging in failed, please try again later.', 500));
     }
     if (!existingUser) {
-        return next(new HttpError('Invalid credentials, could not log you in.', 401));
+        return next(new HttpError('Invalid credentials, could not log you in.', 403));
     }
 
     let isValidPassword = false;
@@ -119,7 +119,7 @@ const logIn = async (req, res, next) => {
     }
 
     if (!isValidPassword) {
-        return next(new HttpError('Invalid credentials, could not log you in.', 401));
+        return next(new HttpError('Invalid credentials, could not log you in.', 403));
     }
 
     // generate jwt token

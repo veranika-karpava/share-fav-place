@@ -182,6 +182,11 @@ const updatePlaceById = async (req, res, next) => {
         return next(error);
     }
 
+    // check if this place belongs on this user
+    if (place.creator.toString() !== req.userData.userId) {
+        return next(new HttpError('You are not allowed to edit this place. ', 401));
+    }
+
     place.title = title;
     place.description = description;
 
@@ -218,10 +223,13 @@ const deletePlaceById = async (req, res, next) => {
         return next(new HttpError('Could not find place for this is id', 404));
     }
 
+    // check if this place belongs on this user
+    if (place.creator.id !== req.userData.userId) {
+        return next(new HttpError('You are not allowed to delete this place. ', 401));
+    }
+
     // image path
-
     const imagePath = place.image;
-
 
     try {
         const sess = await mongoose.startSession();
