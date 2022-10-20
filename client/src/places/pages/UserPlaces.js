@@ -32,7 +32,7 @@ const UserPlaces = () => {
         <section className='user-places'>
             <ErrorModal error={error} onClear={clearError} />
             {isLoading && <div className='message__container-loading'><LoadingSpinner /></div>}
-            {!loadedPlaces &&
+            {!isLoading && !loadedPlaces &&
                 <div className='user-places__container-empty-list'>
                     <p className='user-places__message-empty'>Sorry, user's list is empty</p>
                     <Link to='/' className='user-places__link'>Back to main page</Link>
