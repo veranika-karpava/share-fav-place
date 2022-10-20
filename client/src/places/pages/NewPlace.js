@@ -13,6 +13,7 @@ import Button from '../../shared/components/Button/Button';
 import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/ImageUpload/ImageUpload';
+import { FiTrendingUp } from 'react-icons/fi';
 
 const NewPlace = () => {
     const auth = useContext(AuthContext); // access the managing states

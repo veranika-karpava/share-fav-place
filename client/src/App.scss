@@ -64,6 +64,8 @@ h3 {
 .user-places,
 .message__container-loading {
     @include flex(center, center, column, nowrap);
+    width: 100%;
+    height: 100vh;
 
     @include tablet {
         @include flex(center, center, row, nowrap);

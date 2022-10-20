@@ -14,8 +14,8 @@
         height: 46px;
         margin: 1px;
         border-radius: 50%;
-        border: 5px solid #510077;
-        border-color: #510077 transparent #510077 transparent;
+        border: 5px solid $color-color-border;
+        border-color: $color-color-border transparent $color-color-border transparent;
 
         @include keyframes(spin) {
             0% {
@@ -30,17 +30,6 @@
         @include animate(spin, 1.2s, linear, infinite);
     }
 }
-
-// @keyframes lds-dual-ring {
-//     0% {
-//         transform: rotate(0deg);
-//     }
-
-//     100% {
-//         transform: rotate(360deg);
-//     }
-// }
-
 
 .loading-spinner__overlay {
     height: 100%;

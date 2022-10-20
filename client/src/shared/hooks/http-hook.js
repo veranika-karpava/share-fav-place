@@ -1,10 +1,12 @@
 import { useRef, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // name must contain use at the beginning - rule of hooks
 export const useHttpClient = () => {
     // for managing loading and error state
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
+    const history = useHistory();
 
     // function w/t default param
     // useCallback  - don't allow recreate this func when component that uses this hook renders
@@ -32,7 +34,7 @@ export const useHttpClient = () => {
     }, []);
 
     const clearError = () => {
-        setError(null)
+        setError(null);
     }
 
     return { isLoading, error, sendRequest, clearError };
