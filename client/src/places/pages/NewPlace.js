@@ -13,7 +13,6 @@ import Button from '../../shared/components/Button/Button';
 import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/ImageUpload/ImageUpload';
-import { FiTrendingUp } from 'react-icons/fi';
 
 const NewPlace = () => {
     const auth = useContext(AuthContext); // access the managing states
@@ -40,7 +39,6 @@ const NewPlace = () => {
         }
     )
 
-
     const placeSubmitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -65,6 +63,11 @@ const NewPlace = () => {
             <ErrorModal error={error} onClear={clearError} />
             <form className='place-form__form'>
                 {isLoading && <LoadingSpinner asOverlay />}
+                <h1 className='place-form__title'>Add your new favourite place</h1>
+                <ImageUpload center
+                    id='image'
+                    onInput={inputHandler}
+                    errorText='Please provide an image' />
                 <Input
                     id='title'
                     element="input"
@@ -73,7 +76,6 @@ const NewPlace = () => {
                     errorText='Please enter a valid title.'
                     validators={[VALIDATOR_REQUIRE()]}
                     onInput={inputHandler} />
-
                 <Input
                     id='description'
                     element='textarea'
@@ -81,7 +83,6 @@ const NewPlace = () => {
                     errorText='Please enter a valid description (at least 5 characters).'
                     validators={[VALIDATOR_MINLENGTH(5)]}
                     onInput={inputHandler} />
-
                 <Input
                     id='address'
                     element='input'
@@ -89,11 +90,6 @@ const NewPlace = () => {
                     errorText='Please enter a valid address.'
                     validators={[VALIDATOR_REQUIRE()]}
                     onInput={inputHandler} />
-                <ImageUpload center
-                    id='image'
-                    onInput={inputHandler}
-                    errorText='Please provide an image' />
-
                 <Button type="submit" disabled={!formState.isValid} onClick={placeSubmitHandler}>ADD PLACE</Button>
             </form>
         </section>

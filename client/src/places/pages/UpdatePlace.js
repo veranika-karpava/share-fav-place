@@ -96,6 +96,9 @@ const UpdatePlace = () => {
         )
     }
 
+    const cancelUpdateHandler = () => {
+        history.push('/' + auth.userId + '/places')
+    }
 
     return (
         <section className='place-form'>
@@ -120,7 +123,10 @@ const UpdatePlace = () => {
                         onInput={inputHandler}
                         initialValue={loadedPlaces.description}
                         initialValid={true} />
-                    <Button type='submit' disabled={!formState.isValid}>UPDATE PLACE</Button>
+                    <div className='place-form__actions'>
+                        <Button onClick={cancelUpdateHandler}>CANCEL</Button>
+                        <Button type='submit' disabled={!formState.isValid}>UPDATE PLACE</Button>
+                    </div>
                 </form>
             )}
         </section>

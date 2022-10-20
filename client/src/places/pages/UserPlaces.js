@@ -6,7 +6,6 @@ import PlaceList from '../components/PlaceList/PlaceList';
 import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import UserList from '../../user/components/UserList/UserList';
 
 const UserPlaces = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -26,7 +25,6 @@ const UserPlaces = () => {
     const placeDeleteHandler = (deletedPlaceId) => {
         setLoadedPlaces(prevPlaces => prevPlaces.filter(place => place.id !== deletedPlaceId));
     }
-
 
     return (
         <section className='user-places'>
