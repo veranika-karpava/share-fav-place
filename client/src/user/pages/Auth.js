@@ -85,6 +85,7 @@ const Auth = () => {
                 {isLoading && <LoadingSpinner asOverlay />}
                 <h2 className='user-auth__header'>{isLoginMode ? 'Login' : 'Sign Up'}</h2>
                 <form className='user-auth__form' onSubmit={authSubmitHandler}>
+                    {!isLoginMode && <ImageUpload id='image' onInput={inputHandler} errorText='Please provide an image' />}
                     {!isLoginMode &&
                         (<Input
                             id='name'
@@ -95,7 +96,6 @@ const Auth = () => {
                             validators={[VALIDATOR_REQUIRE()]}
                             errorText='Please enter an Username' onInput={inputHandler} />
                         )}
-                    {!isLoginMode && <ImageUpload id='image' center onInput={inputHandler} errorText='Please provide an image' />}
                     <Input
                         id='email'
                         element='input'
@@ -120,7 +120,6 @@ const Auth = () => {
                     <p>{isLoginMode ? `Don't have an account?` : 'Do you have an account'} </p>
                     <Button inverse onClick={switchModeHandler}>SWITCH TO {isLoginMode ? 'SIGN UP' : 'LOG IN'}</Button>
                 </div>
-
             </Card>
         </section>
     );

@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import Input from '../../shared/components/Input/Input';
-import Button from '../../shared/components/Button/Button';
-import Card from '../../shared/components/Card/Card';
-import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
-import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import { useForm } from '../../shared/hooks/form-hooks';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/contex/auth_context';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 import './PlaceForm.scss';
+import Input from '../../shared/components/Input/Input';
+import Button from '../../shared/components/Button/Button';
+import Card from '../../shared/components/Card/Card';
+import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
+import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 
 const UpdatePlace = () => {
     const auth = useContext(AuthContext);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';// get router params from dynamic router
 
 import PlaceList from '../components/PlaceList/PlaceList';
@@ -17,7 +16,9 @@ const UserPlaces = () => {
             try {
                 const responseData = await sendRequest(`http://localhost:5050/api/places/user/${userId}`);
                 setLoadedPlaces(responseData.places);
-            } catch (err) { }
+            } catch (err) {
+
+            }
         };
         fetchPlaces();
     }, [sendRequest, userId])
@@ -30,11 +31,11 @@ const UserPlaces = () => {
         <section className='user-places'>
             <ErrorModal error={error} onClear={clearError} />
             {isLoading && <div className='message__container-loading'><LoadingSpinner /></div>}
-            {!isLoading && !loadedPlaces &&
+            {/* {!isLoading && !loadedPlaces &&
                 <div className='user-places__container-empty-list'>
                     <p className='user-places__message-empty'>Sorry, user's list is empty</p>
                     <Link to='/' className='user-places__link'>Back to main page</Link>
-                </div>}
+                </div>} */}
             {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={placeDeleteHandler} />}
         </section>
     );
