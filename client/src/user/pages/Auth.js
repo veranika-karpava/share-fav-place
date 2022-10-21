@@ -11,6 +11,7 @@ import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../s
 import { useForm } from '../../shared/hooks/form-hooks';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/contex/auth_context';
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Auth = () => {
     const auth = useContext(AuthContext);
@@ -48,7 +49,7 @@ const Auth = () => {
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    'http://localhost:5050/api/users/login',
+                    `${API_URL}/users/login`,
                     'POST',
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -68,7 +69,7 @@ const Auth = () => {
                 formData.append('password', formState.inputs.password.value);
                 formData.append('image', formState.inputs.image.value);
                 const responseData = await sendRequest(
-                    'http://localhost:5050/api/users/signup',
+                    `${API_URL}/users/signup`,
                     'POST',
                     // couldn't JSON.stringify - because image is binary data
                     formData

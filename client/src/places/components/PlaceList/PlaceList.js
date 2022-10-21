@@ -6,7 +6,6 @@ import PlaceItem from '../PlaceItem/PlaceItem';
 import Button from '../../../shared/components/Button/Button';
 
 const PlaceList = ({ items, onDeletePlace }) => {
-    console.log(items)
     if (items.length === 0) {
         return <div className='message'>
             <Card>

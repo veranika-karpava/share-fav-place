@@ -12,6 +12,7 @@ import Button from '../../shared/components/Button/Button';
 import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/ImageUpload/ImageUpload';
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const NewPlace = () => {
     const auth = useContext(AuthContext); // access the managing states
@@ -48,7 +49,7 @@ const NewPlace = () => {
             formData.append('image', formState.inputs.image.value);
 
             await sendRequest(
-                'http://localhost:5050/api/places',
+                `${API_URL}/places`,
                 'POST',
                 formData,
                 { Authorization: 'Bearer ' + auth.token });

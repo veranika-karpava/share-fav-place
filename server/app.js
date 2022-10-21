@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');// parse body from incoming request
-const PORT = 5050;
+const PORT = process.env.PORT || 8080;
 
 const placesRouter = require('./routes/places');
 const usersRouter = require('./routes/users');
@@ -68,7 +69,7 @@ app.use((error, req, res, next) => {
 
 // connect with database and listen port
 mongoose
-    .connect('mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lhybrvz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority')
+    .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lhybrvz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
     .then(() => {
         // if connection with db is succeseful, the port is listened
         app.listen(PORT, () => {

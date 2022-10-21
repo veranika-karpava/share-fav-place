@@ -11,6 +11,7 @@ import Button from '../../shared/components/Button/Button';
 import Card from '../../shared/components/Card/Card';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const UpdatePlace = () => {
     const auth = useContext(AuthContext);
@@ -40,7 +41,7 @@ const UpdatePlace = () => {
     useEffect(() => {
         const fetchPlace = async () => {
             try {
-                const responseData = await sendRequest(`http://localhost:5050/api/places/${placeId}`);
+                const responseData = await sendRequest(`${API_URL}/places/${placeId}`);
                 setLoadedPlaces(responseData.place);
                 setFormData({
                     title: {
@@ -62,7 +63,7 @@ const UpdatePlace = () => {
         e.preventDefault();
         try {
             await sendRequest(
-                `http://localhost:5050/api/places/${placeId}`,
+                `${API_URL}/places/${placeId}`,
                 'PATCH',
                 JSON.stringify({
                     title: formState.inputs.title.value,

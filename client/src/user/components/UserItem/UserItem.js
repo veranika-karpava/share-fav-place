@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Avatar from '../../../shared/components/Avatar/Avatar';
 import Card from '../../../shared/components/Card/Card';
 import './UserItem.scss';
+const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 const UserItem = ({ id, image, name, placeCount }) => {
     return (
@@ -11,7 +12,7 @@ const UserItem = ({ id, image, name, placeCount }) => {
             <Card className='users__item-content'>
                 <Link to={`/${id}/places`} className='users__item-link'>
                     <div className='users__item-image'>
-                        <Avatar image={`http://localhost:5050/${image}`} alt={name} />
+                        <Avatar image={`${ASSET_URL}/${image}`} alt={name} />
                     </div>
                     <div className='users__item-info'>
                         <h2 className='users__item-name'>{name}</h2>

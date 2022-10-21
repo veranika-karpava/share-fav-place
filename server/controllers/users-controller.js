@@ -5,7 +5,8 @@ const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-const PORT = 5050;
+const JWT_KEY = process.env.JWT_SECRET_KEY;
+const PORT = process.env.PORT || 8080;
 
 // function for getting list of users
 const getUsers = async (req, res, next) => {
@@ -80,7 +81,7 @@ const signUp = async (req, res, next) => {
     try {
         token = jwt.sign(
             { userId: createdUser.id, email: createdUser.email },
-            'JWT_KEY',
+            JWT_KEY,
             { expiresIn: '1h' }
         );
     } catch (err) {
@@ -127,7 +128,7 @@ const logIn = async (req, res, next) => {
     try {
         token = jwt.sign(
             { userId: existingUser.id, email: existingUser.email },
-            'JWT_KEY',
+            JWT_KEY,
             { expiresIn: '1h' }
         );
     } catch (err) {

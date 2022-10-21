@@ -9,6 +9,8 @@ import ErrorModal from '../../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../../shared/components/LoadingSpinner/LoadingSpinner';
 import { AuthContext } from '../../../shared/contex/auth_context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates, onDelete }) => {
     const auth = useContext(AuthContext);
@@ -33,7 +35,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
         setShowConfirmModal(false);
         try {
             await sendRequest(
-                `http://localhost:5050/api/places/${id}`,
+                `${API_URL}/places/${id}`,
                 'DELETE',
                 null,
                 { Authorization: 'Bearer ' + auth.token }
@@ -71,7 +73,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                 <Card className='user-places__card'>
                     {isLoading && <LoadingSpinner asOverlay />}
                     <div className='user-places__view'>
-                        <img src={`http://localhost:5050/${image}`} alt={title} className='user-places__image' />
+                        <img src={`${ASSET_URL}/${image}`} alt={title} className='user-places__image' />
                     </div>
                     <div className='user-places__info'>
                         <h2 className='user-places__name'>{title}</h2>

@@ -5,6 +5,7 @@ import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Users = () => {
     const [loadedUsers, setLoadedUsers] = useState();
@@ -14,7 +15,7 @@ const Users = () => {
         const fetchUsers = async () => {
             try {
                 const responseData = await sendRequest(
-                    'http://localhost:5050/api/users'
+                    `${API_URL}/users`
                 );
 
                 setLoadedUsers(responseData.users);
