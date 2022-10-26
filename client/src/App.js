@@ -10,6 +10,8 @@ import UpdatePlace from './places/pages/UpdatePlace';
 import Auth from './user/pages/Auth';
 import { AuthContext } from './shared/contex/auth_context';
 
+
+
 let logoutTimer;
 
 const App = () => {
