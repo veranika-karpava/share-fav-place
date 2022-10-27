@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config();
-
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');// parse body from incoming request
-const PORT = process.env.PORT || 8080;
 
 const placesRouter = require('./routes/places');
 const usersRouter = require('./routes/users');
@@ -72,8 +72,8 @@ mongoose
     .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lhybrvz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
     .then(() => {
         // if connection with db is succeseful, the port is listened
-        app.listen(PORT, () => {
-            console.log(`🚀 Server listening on ${PORT}`)
+        app.listen(process.env.PORT || 5050, () => {
+            console.log(`🚀 Server listening on ${process.env.PORT}`)
         })
     })
     .catch(err => {

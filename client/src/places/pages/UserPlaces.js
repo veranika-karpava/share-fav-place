@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';// get router params from dynamic router
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';// get router params from dynamic router
 
 import PlaceList from '../components/PlaceList/PlaceList';
-import ErrorModal from '../../shared/components/ErrorModal/ErrorModal';
+import Card from '../../shared/components/Card/Card';
+import Button from '../../shared/components/Button/Button';
 import LoadingSpinner from '../../shared/components/LoadingSpinner/LoadingSpinner';
+import { AuthContext } from '../../shared/contex/auth_context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const UserPlaces = () => {
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const auth = useContext(AuthContext);
+    const { isLoading, sendRequest } = useHttpClient();
     const [loadedPlaces, setLoadedPlaces] = useState();
     const userId = useParams().userId;  // get userID from router
 
@@ -30,13 +33,15 @@ const UserPlaces = () => {
 
     return (
         <section className='user-places'>
-            <ErrorModal error={error} onClear={clearError} />
             {isLoading && <div className='message__container-loading'><LoadingSpinner /></div>}
-            {!isLoading && !loadedPlaces &&
-                <div className='user-places__container-empty-list'>
-                    <p className='user-places__message-empty'>Sorry, user's list is empty</p>
-                    <Link to='/' className='user-places__link'>Back to main page</Link>
-                </div>}
+            {!isLoading && !loadedPlaces && <div className='message'>
+                <Card>
+                    <h2 className='message__content'>
+                        {auth.userId === userId ? 'No places found. Maybe create one?' : 'Sorry, no places found.'}
+                    </h2>
+                    {auth.userId === userId ? <Button to='/places/new'>SHARE YOUR PLACE</Button> : <Button to='/'>BACK TO MAIN PAGE</Button>}
+                </Card>
+            </div>}
             {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={placeDeleteHandler} />}
         </section>
     );

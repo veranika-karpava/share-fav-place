@@ -33,9 +33,10 @@ h3 {
     text-align: center;
     @include flex(center, center, row, nowrap);
 
-    &__content {
+    &__content,
+    &__link {
         width: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         @include font-stack-message-error;
     }
 }
