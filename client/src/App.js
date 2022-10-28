@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import './App.scss'
 import MainHeader from './shared/components/MainHeader/MainHeader';
+import Footer from './shared/components/Footer/Footer';
 import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import Users from './user/pages/Users';
@@ -110,6 +111,7 @@ const App = () => {
       <main>
         {routes}
       </main>
+      <Footer />
     </BrowserRouter>
   </AuthContext.Provider>
 
