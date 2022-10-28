@@ -3,15 +3,14 @@
 @use "../../../styles/partials/variables" as *;
 
 .footer {
-    position: absolute;
-    bottom: -10%;
+    position: fixed;
+    bottom: 0;
     padding: 1rem;
     background-color: $color-header-button;
     width: 100%;
     @include flex(space-between, center, column, nowrap);
 
     &__text {
-        @include font-stack-main;
         font-size: 0.8rem;
         width: 100%;
         text-align: center;
