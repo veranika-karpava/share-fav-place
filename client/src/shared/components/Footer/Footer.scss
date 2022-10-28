@@ -3,8 +3,8 @@
 @use "../../../styles/partials/variables" as *;
 
 .footer {
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    bottom: -10%;
     padding: 1rem;
     background-color: $color-header-button;
     width: 100%;

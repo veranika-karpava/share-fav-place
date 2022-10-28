@@ -22,7 +22,7 @@ const inputReducer = (state, action) => {
     }
 }
 
-const Input = ({ element, type, id, placeholder, rows, label, errorText, validators, onInput, initialValue, initialValid }) => {
+const Input = ({ element, type, id, placeholder, rows, maxlength, label, errorText, validators, onInput, initialValue, initialValid }) => {
 
     const [inputState, dispatch] = useReducer(inputReducer, {
         value: initialValue || '',
@@ -50,9 +50,8 @@ const Input = ({ element, type, id, placeholder, rows, label, errorText, validat
         ?
         (<input id={id} type={type} placeholder={placeholder} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />)
         :
-        (<textarea id={id} rows={rows || 3} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />
+        (<textarea id={id} rows={rows || 3} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} maxlength={maxlength || 100} />
         );
-
     return (
         <div className={`form__container ${!inputState.isValid && inputState.isTouched && 'form__container--invalid'}`}>
             <label htmlFor={id} className='form__label'>{label}</label>

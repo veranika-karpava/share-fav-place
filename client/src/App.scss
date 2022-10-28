@@ -14,6 +14,8 @@ body {
     font-family: 'Open Sans', sans-serif;
     @include font-stack-main;
     background: $bg-body;
+    position: relative;
+    min-height: 100vh;
 }
 
 main {
