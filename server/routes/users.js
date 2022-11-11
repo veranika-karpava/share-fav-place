@@ -3,7 +3,8 @@ const { check } = require('express-validator')// import check method from expres
 
 // import controller
 const usersControllers = require('../controllers/users-controller');
-const fileUpload = require('../middleware/file-upload');
+const { fileUpload } = require('../config/multerConfig');
+const { cloudinaryConfig } = require('../config/cloudinaryConfig');
 
 
 
@@ -15,7 +16,7 @@ usersRouter.get('/', usersControllers.getUsers);
 
 // route for sign up
 //.single(fieldname)  - accept a single file with the name fieldname. The single file will be stored in req.file.
-usersRouter.post('/signup', fileUpload.single('image'), [check('name').not().isEmpty(), check('email').normalizeEmail().isEmail(), check('password').isLength({ min: 6 })], usersControllers.signUp);
+usersRouter.post('/signup', cloudinaryConfig, fileUpload, [check('name').not().isEmpty(), check('email').normalizeEmail().isEmail(), check('password').isLength({ min: 6 })], usersControllers.signUp);
 
 //route for log in
 usersRouter.post('/login', usersControllers.logIn);

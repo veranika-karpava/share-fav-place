@@ -102,13 +102,21 @@ const createPlace = async (req, res, next) => {
     //     creator
     // };
 
+    let resultUrl;
+
+    // if (process.env.STORAGE_TYPE == 'cloud') {
+    //     resultUrl = await cloudinary.uploader.upload(req.file.path);
+    // } else {
+    //     resultUrl = req.file.path;
+    // }
+
     // create new place by using model 
     const createdPlace = new Place({
         title,
         description,
         address,
         location: coordinates,
-        image: req.file.path,
+        image: resultUrl,
         creator: req.userData.userId
     });
 

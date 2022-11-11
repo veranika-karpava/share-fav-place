@@ -12,7 +12,8 @@ const UserItem = ({ id, image, name, placeCount }) => {
             <Card className='users__item-content'>
                 <Link to={`/${id}/places`} className='users__item-link'>
                     <div className='users__item-image'>
-                        <Avatar image={`${ASSET_URL}/${image}`} alt={name} />
+                        <Avatar image={
+                            image.includes('http' || 'https') ? image : `${ASSET_URL}/${image}`} alt={name} />
                     </div>
                     <div className='users__item-info'>
                         <h2 className='users__item-name'>{name}</h2>

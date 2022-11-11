@@ -5,8 +5,9 @@ const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
+const { dataUri } = require('../config/multerConfig');
+const { uploader } = require('../config/cloudinaryConfig');
 const JWT_KEY = process.env.JWT_SECRET_KEY;
-const PORT = process.env.PORT || 8080;
 
 // function for getting list of users
 const getUsers = async (req, res, next) => {
@@ -60,15 +61,45 @@ const signUp = async (req, res, next) => {
         return next(new HttpError('Could not create user, please try again.', 500))
     }
 
+    let createdUser;
+    try {
+        if (process.env.STORAGE_TYPE == "cloud") {
+            const file = dataUri(req).content;
+            const result = await uploader.upload(file);
+            createdUser = new User({
+                name,
+                email,
+                image: result.secure_url,
+                cloudinary_id: result.public_id,
+                password: hashedPassword,
+                places: []
+            });
+        } else {
+            createdUser = new User({
+                name,
+                email,
+                image: req.file.filename,
+                cloudinary_id: null,
+                password: hashedPassword,
+                places: []
+            });
+        }
+    } catch (err) {
+        console.log(err);
+    }
 
 
-    const createdUser = new User({
-        name,
-        email,
-        image: req.file.path,
-        password: hashedPassword,
-        places: []
-    });
+
+
+    // const createdUser = new User({
+    //     name,
+    //     email,
+    //     image: result.secure_url,
+    //     cloudinary_id: result.public_id,
+    //     password: hashedPassword,
+    //     places: []
+    // });
+
 
     try {
         await createdUser.save()
@@ -87,8 +118,6 @@ const signUp = async (req, res, next) => {
     } catch (err) {
         return next(new HttpError('Signing up failed, please try again', 500));
     }
-
-
 
     res.status(201).json({ userId: createdUser.id, email: createdUser.email, token: token });
 }
