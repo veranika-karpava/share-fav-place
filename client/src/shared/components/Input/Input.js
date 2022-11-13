@@ -50,7 +50,7 @@ const Input = ({ element, type, id, placeholder, rows, maxlength, label, errorTe
         ?
         (<input id={id} type={type} placeholder={placeholder} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} />)
         :
-        (<textarea id={id} rows={rows || 3} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} maxlength={maxlength || 100} />
+        (<textarea id={id} rows={rows || 3} className='form__input' onChange={onChangeHandler} value={inputState.value} onBlur={touchHandler} maxLength={maxlength || 100} />
         );
     return (
         <div className={`form__container ${!inputState.isValid && inputState.isTouched && 'form__container--invalid'}`}>

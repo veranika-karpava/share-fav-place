@@ -8,7 +8,7 @@ const Place = require('../models/place');
 const User = require('../models/user');
 const getCoordForAddress = require('../util/location');
 const { dataUri } = require('../config/multerConfig');
-const { uploader } = require('../config/cloudinaryConfig');
+const { cloudinaryConfig, uploader } = require('../config/cloudinaryConfig');
 
 // function for getting a specific place id(pid)
 const getPlaceById = async (req, res, next) => {
@@ -266,9 +266,17 @@ const deletePlaceById = async (req, res, next) => {
         return next(new HttpError('Something went wrong, could not delete place.', 500))
     }
 
-    fs.unlink(imagePath, err => {
-        console.log(err)
-    })
+    if (process.env.STORAGE_TYPE == "cloud") {
+        await uploader.destroy(place.cloudinary_id);
+    } else {
+        fs.unlink(imagePath, err => {
+            console.log(err)
+        })
+    }
+
+    // fs.unlink(imagePath, err => {
+    //     console.log(err)
+    // })
 
     res.status(200).json({ message: "Deleted place." })
 }
