@@ -78,7 +78,7 @@ const signUp = async (req, res, next) => {
             createdUser = new User({
                 name,
                 email,
-                image: req.file.filename,
+                image: req.file.path,
                 cloudinary_id: null,
                 password: hashedPassword,
                 places: []
@@ -87,19 +87,6 @@ const signUp = async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
-
-
-
-
-    // const createdUser = new User({
-    //     name,
-    //     email,
-    //     image: result.secure_url,
-    //     cloudinary_id: result.public_id,
-    //     password: hashedPassword,
-    //     places: []
-    // });
-
 
     try {
         await createdUser.save()

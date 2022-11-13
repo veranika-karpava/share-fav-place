@@ -7,6 +7,8 @@ const HttpError = require('../models/http-error');
 const Place = require('../models/place');
 const User = require('../models/user');
 const getCoordForAddress = require('../util/location');
+const { dataUri } = require('../config/multerConfig');
+const { uploader } = require('../config/cloudinaryConfig');
 
 // function for getting a specific place id(pid)
 const getPlaceById = async (req, res, next) => {
@@ -102,23 +104,37 @@ const createPlace = async (req, res, next) => {
     //     creator
     // };
 
-    let resultUrl;
-
-    // if (process.env.STORAGE_TYPE == 'cloud') {
-    //     resultUrl = await cloudinary.uploader.upload(req.file.path);
-    // } else {
-    //     resultUrl = req.file.path;
-    // }
-
     // create new place by using model 
-    const createdPlace = new Place({
-        title,
-        description,
-        address,
-        location: coordinates,
-        image: resultUrl,
-        creator: req.userData.userId
-    });
+
+    let createdPlace;
+    try {
+        if (process.env.STORAGE_TYPE == "cloud") {
+            const file = dataUri(req).content;
+            const result = await uploader.upload(file);
+            createdPlace = new Place({
+                title,
+                description,
+                address,
+                location: coordinates,
+                image: result.secure_url,
+                cloudinary_id: result.public_id,
+                creator: req.userData.userId
+
+            });
+        } else {
+            createdPlace = new Place({
+                title,
+                description,
+                address,
+                location: coordinates,
+                image: req.file.path,
+                cloudinary_id: null,
+                creator: req.userData.userId
+            });
+        }
+    } catch (err) {
+        console.log(err);
+    }
 
     //find user that created a new place
     let user;

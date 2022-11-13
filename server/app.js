@@ -3,7 +3,6 @@ const path = require('path');
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
-
 const cloudinary = require('cloudinary').v2;
 const express = require('express');
 const mongoose = require('mongoose');
@@ -55,7 +54,7 @@ app.use((req, res, next) => {
 // default error handler
 app.use((error, req, res, next) => {
     // const file = dataUri(req).content;
-    //if error, it check and don't add image to folder
+    // // if error, it check and don't add image to folder
     // if (req.file) {
     //     // unlink() - delete file
     //     fs.unlink(req.file.path, (err) => {

@@ -24,7 +24,7 @@ placesRouter.get('/user/:uid', placesControllers.getPlacesByUserId);
 placesRouter.use(checkAuth);
 
 // add a new place
-placesRouter.post('/', fileUpload, [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);
+placesRouter.post('/', cloudinaryConfig, fileUpload, [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);
 
 // update a place by id(pid)
 placesRouter.patch('/:pid', [check('title').not().isEmpty(), check('description').isLength({ min: 5 })], placesControllers.updatePlaceById);

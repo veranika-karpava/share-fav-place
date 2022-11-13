@@ -6,8 +6,6 @@ const usersControllers = require('../controllers/users-controller');
 const { fileUpload } = require('../config/multerConfig');
 const { cloudinaryConfig } = require('../config/cloudinaryConfig');
 
-
-
 // create our router
 const usersRouter = express.Router();
 
