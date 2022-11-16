@@ -35,6 +35,10 @@ h3 {
     text-align: center;
     @include flex(center, center, row, nowrap);
 
+    @include tablet {
+        width: 50%;
+    }
+
     &__content,
     &__link {
         width: 100%;

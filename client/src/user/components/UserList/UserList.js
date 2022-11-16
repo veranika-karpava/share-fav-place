@@ -13,7 +13,7 @@ const UserList = ({ users }) => {
                 </Card>
             </div>
         );
-    }
+    };
 
     return <ul className='users__list'>
         {users.map(user => (
@@ -25,7 +25,6 @@ const UserList = ({ users }) => {
                 placeCount={user.places.length} />
         ))}
     </ul>
-
 };
 
 export default UserList;

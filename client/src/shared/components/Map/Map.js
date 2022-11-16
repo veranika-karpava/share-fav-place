@@ -1,6 +1,6 @@
+//useRef is used to get references, a pointer at a real DOM node;
+//or create variables which survive re-render cycles of our components and don't lose their value;
 import React, { useRef, useEffect } from 'react';
-
-//useRef is used to get references, a pointer at a real DOM node or create variables which survive re-render cycles of our components and don't lose their value;
 
 import './Map.scss';
 

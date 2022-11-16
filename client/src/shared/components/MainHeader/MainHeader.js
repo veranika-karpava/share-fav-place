@@ -11,13 +11,11 @@ import BackDrop from '../BackDrop/BackDrop';
 const MainHeader = () => {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
-    const openDrawerHandler = () => {
-        setDrawerIsOpen(true)
-    }
+    // event handler for opening navigation in mobile
+    const openDrawerHandler = () => setDrawerIsOpen(true);
 
-    const closeDrawerHandler = () => {
-        setDrawerIsOpen(false)
-    }
+    // event handler for closing navigation in mobile
+    const closeDrawerHandler = () => setDrawerIsOpen(false);
 
     return (
         <React.Fragment>

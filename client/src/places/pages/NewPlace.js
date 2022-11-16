@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-// gives you access to the history instance that you may use to navigate. For rediction to another page
+// access to the history instance. redirect to another page
 import { useHistory } from 'react-router-dom';
 
 import './PlaceForm.scss';
@@ -15,9 +15,11 @@ import ImageUpload from '../../shared/components/ImageUpload/ImageUpload';
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const NewPlace = () => {
-    const auth = useContext(AuthContext); // access the managing states
+    // access the managing states
+    const auth = useContext(AuthContext);
     const history = useHistory();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    // form state with default values
     const [formState, inputHandler] = useForm(
         {
             title: {
@@ -37,8 +39,9 @@ const NewPlace = () => {
                 isValid: false
             }
         }
-    )
+    );
 
+    // event handler for submission form and redirection to main page
     const placeSubmitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -48,15 +51,11 @@ const NewPlace = () => {
             formData.append('address', formState.inputs.address.value);
             formData.append('image', formState.inputs.image.value);
 
-            await sendRequest(
-                `${API_URL}/places`,
-                'POST',
-                formData,
-                { Authorization: 'Bearer ' + auth.token });
+            await sendRequest(`${API_URL}/places`, 'POST', formData, { Authorization: 'Bearer ' + auth.token });
             // redirect to main page 
             history.push('/');
         } catch (err) { }
-    }
+    };
 
     return (
         <section className='place-form'>

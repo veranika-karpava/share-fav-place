@@ -6,7 +6,6 @@ export const useHttpClient = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
 
-
     // function w/t default param
     // useCallback  - don't allow recreate this func when component that uses this hook renders
     const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
@@ -34,7 +33,7 @@ export const useHttpClient = () => {
 
     const clearError = () => {
         setError(null);
-    }
+    };
 
     return { isLoading, error, sendRequest, clearError };
 };

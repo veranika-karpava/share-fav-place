@@ -19,11 +19,10 @@ const UpdatePlace = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedPlaces, setLoadedPlaces] = useState();
 
-
-    // find id for place from url
+    // get id from url param
     const placeId = useParams().placeId;
-    // get info for special place 
 
+    //formData for update info about place with default values
     const [formState, inputHandler, setFormData] = useForm(
         {
             title: {
@@ -38,7 +37,9 @@ const UpdatePlace = () => {
         false
     );
 
+    // render component every time when sendRequest, placeId, setFormData changes
     useEffect(() => {
+        // get place's info depends on the placeId
         const fetchPlace = async () => {
             try {
                 const responseData = await sendRequest(`${API_URL}/places/${placeId}`);
@@ -56,15 +57,13 @@ const UpdatePlace = () => {
             } catch (err) { }
         }
         fetchPlace();
-    }, [sendRequest, placeId, setFormData])
+    }, [sendRequest, placeId, setFormData]);
 
-
+    // event handler for submission of update place's info
     const placeUpdateSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            await sendRequest(
-                `${API_URL}/places/${placeId}`,
-                'PATCH',
+            await sendRequest(`${API_URL}/places/${placeId}`, 'PATCH',
                 JSON.stringify({
                     title: formState.inputs.title.value,
                     description: formState.inputs.description.value
@@ -74,10 +73,10 @@ const UpdatePlace = () => {
                     Authorization: 'Bearer ' + auth.token
                 }
             );
+            // redirect to user's list of places
             history.push('/' + auth.userId + '/places')
         } catch (err) { }
-
-    }
+    };
 
     if (isLoading) {
         return (
@@ -85,7 +84,7 @@ const UpdatePlace = () => {
                 <LoadingSpinner asOvelay />
             </div>
         )
-    }
+    };
 
     if (!loadedPlaces && !error) {
         return (
@@ -95,11 +94,12 @@ const UpdatePlace = () => {
                 </Card>
             </div>
         )
-    }
+    };
 
+    // event handler to cancel update data and redirect to user's list of places
     const cancelUpdateHandler = () => {
         history.push('/' + auth.userId + '/places')
-    }
+    };
 
     return (
         <section className='place-form'>

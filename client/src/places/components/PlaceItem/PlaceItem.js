@@ -18,32 +18,25 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
     const [showMap, setShowMap] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-    // handler for modal with map
+    // event handlers to open and close modal with map
     const openMapHandler = () => setShowMap(true);
+
     const closeMapHandler = () => setShowMap(false);
 
-    // handler for show warning modal
-    const showDeleteWarningHandler = () => {
-        setShowConfirmModal(true)
-    }
+    // event handler to open warning modal when remove a place from places list
+    const showDeleteWarningHandler = () => setShowConfirmModal(true);
 
-    const cancelDeleteHandler = () => {
-        setShowConfirmModal(false)
-    }
+    // event handler to cancel removing a place
+    const cancelDeleteHandler = () => setShowConfirmModal(false);
 
+    // event handler to confirm of removing a place
     const confirmDeleteHandler = async () => {
         setShowConfirmModal(false);
         try {
-            await sendRequest(
-                `${API_URL}/places/${id}`,
-                'DELETE',
-                null,
-                { Authorization: 'Bearer ' + auth.token }
-            );
+            await sendRequest(`${API_URL}/places/${id}`, 'DELETE', null, { Authorization: 'Bearer ' + auth.token });
             onDelete(id);
         } catch (err) { }
-    }
-
+    };
 
     return (
         <>
@@ -59,7 +52,6 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
                     <Map center={coordinates} zoom={16} />
                 </div>
             </Modal>
-
             <Modal header='Are you sure?' footerClass='place-item-actions' footer={
                 <>
                     <Button onClick={cancelDeleteHandler}>CANCEL</Button>
@@ -68,7 +60,6 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
             } show={showConfirmModal}>
                 <p className='modal__content'>Do you want to proceed and delete this place?</p>
             </Modal>
-
             <li className='user-places__item'>
                 <Card className='user-places__card'>
                     {isLoading && <LoadingSpinner asOverlay />}

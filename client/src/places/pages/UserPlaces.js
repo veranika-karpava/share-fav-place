@@ -13,23 +13,23 @@ const UserPlaces = () => {
     const auth = useContext(AuthContext);
     const { isLoading, sendRequest } = useHttpClient();
     const [loadedPlaces, setLoadedPlaces] = useState();
-    const userId = useParams().userId;  // get userID from router
+    // get userID from url params
+    const userId = useParams().userId;
 
     useEffect(() => {
         const fetchPlaces = async () => {
             try {
                 const responseData = await sendRequest(`${API_URL}/places/user/${userId}`);
                 setLoadedPlaces(responseData.places);
-            } catch (err) {
-
-            }
+            } catch (err) { }
         };
         fetchPlaces();
-    }, [sendRequest, userId])
+    }, [sendRequest, userId]);
 
+    // event handler to remove place from the place's list
     const placeDeleteHandler = (deletedPlaceId) => {
         setLoadedPlaces(prevPlaces => prevPlaces.filter(place => place.id !== deletedPlaceId));
-    }
+    };
 
     return (
         <section className='user-places'>
