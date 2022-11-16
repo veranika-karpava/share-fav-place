@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './PlaceItem.scss';
 import Card from '../../../shared/components/Card/Card';
@@ -14,6 +15,7 @@ const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 const PlaceItem = ({ id, image, title, description, address, creatorId, coordinates, onDelete }) => {
     const auth = useContext(AuthContext);
+    const history = useHistory();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [showMap, setShowMap] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -35,6 +37,7 @@ const PlaceItem = ({ id, image, title, description, address, creatorId, coordina
         try {
             await sendRequest(`${API_URL}/places/${id}`, 'DELETE', null, { Authorization: 'Bearer ' + auth.token });
             onDelete(id);
+            history.push('/');
         } catch (err) { }
     };
 

@@ -29,6 +29,8 @@ const UserPlaces = () => {
     // event handler to remove place from the place's list
     const placeDeleteHandler = (deletedPlaceId) => {
         setLoadedPlaces(prevPlaces => prevPlaces.filter(place => place.id !== deletedPlaceId));
+
+
     };
 
     return (
