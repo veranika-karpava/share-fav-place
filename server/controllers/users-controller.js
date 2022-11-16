@@ -9,58 +9,52 @@ const { dataUri } = require('../config/multerConfig');
 const { uploader } = require('../config/cloudinaryConfig');
 const JWT_KEY = process.env.JWT_SECRET_KEY;
 
-// function for getting list of users
+// get list of users 
 const getUsers = async (req, res, next) => {
-    // res.json({ users: DUMMY_USERS })
     let users;
+    // get list of users from database
     try {
-        users = await User.find({}, '-password'); // or '-password'
+        users = await User.find({}, '-password'); // get all data except password
     } catch (err) {
-        return next(new HttpError('Fetching users failed, please try again later.', 500))
+        return next(new HttpError('Fetching users failed, please try again later.', 500));
     }
+
     res.json({ users: users.map(user => user.toObject({ getters: true })) })
 }
 
-// function for posting sign up users
+// sign up (created new user)
 const signUp = async (req, res, next) => {
-    // const hasUser = DUMMY_USERS.find(user => user.email === email);
-    // if (hasUser) {
-    //     throw new HttpError('Could not create user, email already exists', 422)
-    // }
-    // const createdUser = {
-    //     id: uuid(),
-    //     name,
-    //     email,
-    //     password
-    // }
-    // DUMMY_USERS.push(createdUser);
-
+    // check inputs data
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new HttpError('Invalid inputs passed, please check your data', 422));
-    }
+        return next(new HttpError('Invalid inputs passed, please check your data.', 422));
+    };
 
+    // get data from post request
     const { name, email, password } = req.body;
 
     let existingUser;
 
+    // check exciting user in database using email
     try {
         existingUser = await User.findOne({ email: email })
     } catch (err) {
-        return next(new HttpError('Signing up failed, please try again later.', 500))
+        return next(new HttpError('Signing up failed, please try again later.', 500));
     }
 
     if (existingUser) {
-        return next(new HttpError('User exists already, please login instead', 422))
+        return next(new HttpError('User exists already, please login.', 422));
     }
 
+    // hashed password
     let hashedPassword;
     try {
         hashedPassword = await bcrypt.hash(password, 12);
     } catch (err) {
-        return next(new HttpError('Could not create user, please try again.', 500))
+        return next(new HttpError('Could not create user, please try again.', 500));
     }
 
+    // create new user
     let createdUser;
     try {
         if (process.env.STORAGE_TYPE == "cloud") {
@@ -84,14 +78,13 @@ const signUp = async (req, res, next) => {
                 places: []
             });
         }
-    } catch (err) {
-        console.log(err);
-    }
+    } catch (err) { }
 
+    // save in database
     try {
         await createdUser.save()
     } catch (err) {
-        return next(new HttpError('Signing up failed, please try again', 500))
+        return next(new HttpError('Signing up failed, please try again.', 500));
     }
 
     // generate jwt token
@@ -103,30 +96,29 @@ const signUp = async (req, res, next) => {
             { expiresIn: '1h' }
         );
     } catch (err) {
-        return next(new HttpError('Signing up failed, please try again', 500));
+        return next(new HttpError('Signing up failed, please try again.', 500));
     }
 
     res.status(201).json({ userId: createdUser.id, email: createdUser.email, token: token });
 }
 
-// function for posting logging in users
+// log in user
 const logIn = async (req, res, next) => {
+    // data from post request
     const { email, password } = req.body;
-    // const indetifiedUser = DUMMY_USERS.find(user => user.email === email);
-    // if (!indetifiedUser || indetifiedUser.password === password) {
-    //     throw new HttpError('Could not indentify user, credentials seem to be wrong', 401)
-    // }
 
     let existingUser;
+    // check user exists or not using email
     try {
         existingUser = await User.findOne({ email: email });
     } catch (err) {
         return next(new HttpError('Logging in failed, please try again later.', 500));
     }
     if (!existingUser) {
-        return next(new HttpError('Invalid credentials, could not log you in.', 403));
+        return next(new HttpError('Please check your username, could not log you in.', 403));
     }
 
+    // check password
     let isValidPassword = false;
 
     try {
@@ -136,7 +128,7 @@ const logIn = async (req, res, next) => {
     }
 
     if (!isValidPassword) {
-        return next(new HttpError('Invalid credentials, could not log you in.', 403));
+        return next(new HttpError('Please check your password, could not log you in.', 403));
     }
 
     // generate jwt token

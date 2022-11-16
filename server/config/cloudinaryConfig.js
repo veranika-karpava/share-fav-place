@@ -1,5 +1,6 @@
 const { config, uploader } = require("cloudinary").v2;
 
+// config for accessing clodinary storage
 const cloudinaryConfig = (req, res, next) => {
     if (process.env.STORAGE_TYPE == "cloud") {
         config({

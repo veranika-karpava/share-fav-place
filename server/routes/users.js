@@ -1,12 +1,12 @@
 const express = require('express');
-const { check } = require('express-validator')// import check method from express-validator
+// import check method from express-validator
+const { check } = require('express-validator');
 
-// import controller
 const usersControllers = require('../controllers/users-controller');
 const { fileUpload } = require('../config/multerConfig');
 const { cloudinaryConfig } = require('../config/cloudinaryConfig');
 
-// create our router
+// create router
 const usersRouter = express.Router();
 
 // retrivere list of users
@@ -18,6 +18,5 @@ usersRouter.post('/signup', cloudinaryConfig, fileUpload, [check('name').not().i
 
 //route for log in
 usersRouter.post('/login', usersControllers.logIn);
-
 
 module.exports = usersRouter;

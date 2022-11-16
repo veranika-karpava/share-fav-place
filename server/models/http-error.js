@@ -1,9 +1,11 @@
-// blueprint for error
+// model of Error
 class HttpError extends Error {
     constructor(message, errorCode) {
-        super(message);//Add a message property
-        this.code = errorCode // Adds a code property
+        // Text-message of error
+        super(message);
+        // number of code
+        this.code = errorCode;
     }
 }
 
-module.exports = HttpError; // can use outside of this file
+module.exports = HttpError;
