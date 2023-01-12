@@ -38,20 +38,19 @@ app.use('/api/users', usersRouter);
 // for handling error when router isn't define
 app.use(async (_req, _res, next) => {
     return next(new HttpError('The requested resource does not exist', 404));
-})
+});
 
-// registrate middleware for catch error
-// default error handler
+// for catching error
 app.use((error, _req, res, next) => {
-    // check if a response has alredy been sent, if yes that means that we didn't sent response by our own
+    // check if a response has alredy been sent, 
     if (res.headerSent) {
         return next(error);
     }
     // if not, sent now
     res
-        .status(error.code || 500) // 500 something wrong in server
+        .status(error.code || 500)
         .json({ message: error.message || "An unknown error occured" })
-})
+});
 
 // connect with database and listen port
 mongoose

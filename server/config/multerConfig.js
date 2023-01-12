@@ -3,6 +3,8 @@ const DatauriParser = require('datauri/parser');
 const path = require('path');
 const { v4: uuid } = require('uuid');
 
+const fileFilter = require('../util/fileFilter');
+
 const MIME_TYPE_MAP = {
     'image/png': 'png',
     'image/jpeg': 'jpeg',
@@ -13,6 +15,7 @@ let storage;
 let dataUri;
 const parser = new DatauriParser();
 
+// for defining storage 
 if (process.env.STORAGE_TYPE == 'cloud') {
     // store im virtual storage and save in buffer
     storage = multer.memoryStorage();
@@ -33,13 +36,6 @@ if (process.env.STORAGE_TYPE == 'cloud') {
             cb(null, uuid() + '.' + ext);
         }
     })
-};
-
-// function to control type of file
-const fileFilter = (req, file, cb) => {
-    const isValid = !!MIME_TYPE_MAP[file.mimetype]; // !! - convert to boolean
-    let error = isValid ? null : new Error('Invalid mime type!')
-    cb(error, isValid);
 };
 
 const fileUpload = multer({

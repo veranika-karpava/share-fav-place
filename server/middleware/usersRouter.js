@@ -5,7 +5,6 @@ const { getListUsers, signUp, logIn } = require('../services/usersService');
 const { fileUpload } = require('../config/multerConfig');
 const { cloudinaryConfig } = require('../config/cloudinaryConfig');
 
-// create router
 const usersRouter = express.Router();
 
 // get a list of users
