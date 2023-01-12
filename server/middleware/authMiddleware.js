@@ -1,17 +1,16 @@
 const jwt = require('jsonwebtoken');
+
 const HttpError = require("../models/http-error");
 const JWT_KEY = process.env.JWT_SECRET_KEY;
 
-// define middleware for check auth
-module.exports = (req, res, next) => {
+// for checking authorization
+const loggedIn = (req, _res, next) => {
     if (req.method === 'OPTIONS') {
         return next();
     }
 
     try {
-        //get token
-        const token = req.headers.authorization.split(' ')[1]; // Authorization: 'Bearer TOKREN'
-        // if token isn't exist
+        const token = req.headers.authorization.split(' ')[1]; // Authorization: 'Bearer TOKEN'
         if (!token) {
             throw new HttpError('Authentication failed', 401);
         }
@@ -25,3 +24,5 @@ module.exports = (req, res, next) => {
         return next(new HttpError('Authentication failed', 401));
     }
 };
+
+module.exports = loggedIn;

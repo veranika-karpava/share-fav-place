@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new Schema({
     name: { type: String, required: true },
@@ -8,11 +8,11 @@ const userSchema = new Schema({
     password: { type: String, required: true, minlength: 6 },
     image: { type: String, required: true },
     cloudinary_id: { type: String },
-    // add [] to access places to have many places in property - one user has many places
+    // add [] to access places to have many places in property
     places: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Place' }]
 });
 
-// add for the schema uniqie Validator that check unique email
+// for checking uniqueness of email
 userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);

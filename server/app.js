@@ -1,57 +1,48 @@
-const fs = require('fs');
 const path = require('path');
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
 const express = require('express');
 const mongoose = require('mongoose');
-// parse body from incoming request
 const bodyParser = require('body-parser');
+(process.env.NODE_ENV !== 'production' && require('dotenv').config());
 
-const placesRouter = require('./routes/places');
-const usersRouter = require('./routes/users');
+const placesRouter = require('./middleware/placesRouter');
+const usersRouter = require('./middleware/usersRouter');
 const HttpError = require('./models/http-error');
 
 const app = express();
 
-// registrate middleware to parse body. it should be before router middleware,
-// because need to parse data and then router. Now we could use data from post request in function 
+// middlewares
+// for parsing body that should be before registation routers
 app.use(bodyParser.json());
 
-// middleware for access image
+// for accessing images locally
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
-// handling CORS error
-app.use((req, res, next) => {
-    // force the browser
+// for handling CORS error
+app.use((_req, res, next) => {
     // * allows any domain to send request
     res.setHeader('Access-Control-Allow-Origin', '*');
-    // controlls which headers these requests sent by the browser may have
+    // type of headers that sent by the browser
     res.setHeader(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     );
-    // controlls which HTTP methods may be used on front end
+    // HTTP methods that can be used in client side
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
     next()
 });
 
-
-// registrate middleware for place router
-// express.js will forward requests to places routes middleware if their path starts with /api/places
+// for registration routers 
 app.use('/api/places', placesRouter);
 app.use('/api/users', usersRouter);
 
-// for unsupported routes - registarte middleware that only is reached when some request doesn't have response before
-app.use((req, res, next) => {
-    const error = new HttpError('Could not find this route', 404)
-    //    syncronize use throw, async  - use next
-    throw error;
+// for handling error when router isn't define
+app.use(async (_req, _res, next) => {
+    return next(new HttpError('The requested resource does not exist', 404));
 })
 
 // registrate middleware for catch error
 // default error handler
-app.use((error, req, res, next) => {
+app.use((error, _req, res, next) => {
     // check if a response has alredy been sent, if yes that means that we didn't sent response by our own
     if (res.headerSent) {
         return next(error);

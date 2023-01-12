@@ -1,12 +1,11 @@
 const express = require('express');
-const { check } = require('express-validator')// import check method from express-validator
+const { check } = require('express-validator');
 
-const placesControllers = require('../controllers/places-controller');
+const placesControllers = require('../services/placesService');
 const { fileUpload } = require('../config/multerConfig');
 const { cloudinaryConfig } = require('../config/cloudinaryConfig');
-const checkAuth = require('../middleware/check-auth');
+const loggedIn = require('./authMiddleware');
 
-// create router
 const placesRouter = express.Router();
 
 // get a place by specified place's id(pid)
@@ -17,7 +16,7 @@ placesRouter.get('/user/:uid', placesControllers.getPlacesByUserId);
 
 
 // send back an error response if the request has no valid token and it blocked other routes
-placesRouter.use(checkAuth);
+placesRouter.use(loggedIn);
 
 // add a new place
 placesRouter.post('/', cloudinaryConfig, fileUpload, [check('title').not().isEmpty(), check('description').isLength({ min: 5 }), check('address').not().isEmpty()], placesControllers.createPlace);

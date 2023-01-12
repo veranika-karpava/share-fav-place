@@ -1,7 +1,6 @@
 const fs = require('fs');
-// import result from express-validator
-const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
+const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const Place = require('../models/place');
@@ -10,18 +9,18 @@ const getCoordForAddress = require('../util/location');
 const { dataUri } = require('../config/multerConfig');
 const { uploader } = require('../config/cloudinaryConfig');
 
-// get a place of specified id(pid)
+// for getting the forst place with the specified ID(pid)
 const getPlaceById = async (req, res, next) => {
-    // get pid from url params
+    // pid from url params
     const placeId = req.params.pid;
-    // get data from db
+
     let place;
 
     try {
         place = await Place.findById(placeId);
     } catch (err) {
         return next(new HttpError('Fetching place failed, could not find a place.', 500));
-    }
+    };
 
     if (!place) {
         return next(new HttpError('Could not find a place for the provided id.', 404));
@@ -30,8 +29,8 @@ const getPlaceById = async (req, res, next) => {
     res.json({ place: place.toObject({ getters: true }) });
 };
 
-// get places list of given user id(uid)
-const getPlacesByUserId = async (req, res, next) => {
+// for getting a list of places for given user ID(uid)
+const getListPlacesByUserId = async (req, res, next) => {
     // get uid from url params
     const userId = req.params.uid;
 
@@ -230,7 +229,7 @@ const deletePlaceById = async (req, res, next) => {
 
 // for export many things
 exports.getPlaceById = getPlaceById;
-exports.getPlacesByUserId = getPlacesByUserId;
+exports.getListPlacesByUserId = getListPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlaceById = updatePlaceById;
 exports.deletePlaceById = deletePlaceById;
