@@ -11,7 +11,17 @@ const usersRouter = express.Router();
 usersRouter.get('/', getListUsers);
 
 // for signing up
-usersRouter.post('/signup', cloudinaryConfig, fileUpload, [check('name').not().isEmpty(), check('email').normalizeEmail().isEmail(), check('password').isLength({ min: 6 })], signUp);
+usersRouter.post(
+  '/signup',
+  cloudinaryConfig,
+  fileUpload,
+  [
+    check('name').not().isEmpty(),
+    check('email').normalizeEmail().isEmail(),
+    check('password').isLength({ min: 6 }),
+  ],
+  signUp
+);
 
 //for loging in
 usersRouter.post('/login', logIn);

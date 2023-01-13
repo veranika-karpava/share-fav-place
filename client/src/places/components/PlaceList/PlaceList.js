@@ -5,7 +5,6 @@ import PlaceItem from '../PlaceItem/PlaceItem';
 
 const PlaceList = ({ items, onDeletePlace }) => {
 
-
     return (
         <ul className='user-places__list'>
             {items.map(place =>

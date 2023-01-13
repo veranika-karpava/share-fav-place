@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "eslint:check": "eslint '**/*.{js,jsx}'",
+    "eslint:fix": "eslint --fix '**/*.{js,jsx}'",
+    "prettier:check": "prettier --check '**/*.{js,jsx}'",
+    "prettier:write": "prettier --write '**/*.{js,jsx}'",
+    "delint": "npm run eslint:fix; npm run prettier:write"
   },
   "author": "Veranika Karpava",
   "license": "ISC",
@@ -25,6 +30,42 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.19",
+    "prettier": "2.8.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prefer-destructuring": "off",
+      "camelcase": [
+        "error",
+        {
+          "ignoreDestructuring": true,
+          "properties": "never"
+        }
+      ],
+      "linebreak-style": "error"
+    }
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "singleQuote": true
   }
 }
