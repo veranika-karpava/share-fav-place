@@ -9,6 +9,20 @@ const getCoordForAddress = require('../util/location');
 const { dataUri } = require('../config/multerConfig');
 const { uploader } = require('../config/cloudinaryConfig');
 
+// get list of places
+const getListPlaces = async (_req, res, next) => {
+  let places;
+  try {
+    places = await Place.find({}); // all data except password
+  } catch (err) {
+    return next(
+      new HttpError('Fetching users failed, please try again later.', 500)
+    );
+  }
+
+  res.json({ places: places.map(place => place.toObject({ getters: true })) });
+};
+
 // for getting the forst place with the specified ID(pid)
 const getPlaceById = async (req, res, next) => {
   // pid from url params
@@ -246,6 +260,7 @@ const deletePlaceById = async (req, res, next) => {
   res.status(200).json({ message: 'Deleted place.' });
 };
 
+exports.getListPlaces = getListPlaces;
 exports.getPlaceById = getPlaceById;
 exports.getListPlacesByUserId = getListPlacesByUserId;
 exports.createPlace = createPlace;
