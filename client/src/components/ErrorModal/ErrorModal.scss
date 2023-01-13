@@ -1,0 +1,11 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.modal {
+    &__text-error {
+        padding: 2rem;
+        text-align: center;
+        color: $font-color-place-card;
+    }
+}

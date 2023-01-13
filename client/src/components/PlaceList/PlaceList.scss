@@ -1,0 +1,24 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.user-places {
+    &__container-empty-list {
+        @include flex(center, center, column, nowrap);
+        padding: 1rem;
+    }
+
+    &__message-empty {
+        padding: 1rem;
+    }
+
+    &__list {
+        padding: 0;
+        width: 90%;
+        @include flex(center, center, column, nowrap);
+
+        @include tablet {
+            @include flex(center, center, row, wrap);
+        }
+    }
+}
