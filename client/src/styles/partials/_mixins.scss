@@ -1,31 +1,36 @@
-@use "../partials/variables" as *;
+@use '../partials/variables' as *;
 
 @mixin tablet {
-    @media screen and (min-width: $tablet-breakpoint) {
-        @content;
-    }
+  @media screen and (min-width: $tablet-breakpoint) {
+    @content;
+  }
 }
 
 @mixin desktop {
-    @media screen and (min-width: $desktop-breakpoint) {
-        @content;
-    }
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
 }
 
-@mixin flex($justify-content: flex-start, $align-items: stretch, $flex-direction: row, $flex-wrap: nowrap) {
-    display: flex;
-    justify-content: $justify-content;
-    align-items: $align-items;
-    flex-direction: $flex-direction;
-    flex-wrap: $flex-wrap;
+@mixin flex(
+  $justify-content: flex-start,
+  $align-items: stretch,
+  $flex-direction: row,
+  $flex-wrap: nowrap
+) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
 }
 
 @mixin animate($animation, $duration, $method, $times) {
-    animation: $animation $duration $method $times;
+  animation: $animation $duration $method $times;
 }
 
 @mixin keyframes($name) {
-    @keyframes #{$name} {
-        @content;
-    }
+  @keyframes #{$name} {
+    @content;
+  }
 }

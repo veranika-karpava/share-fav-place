@@ -1,67 +1,66 @@
-@use "../../styles/partials/typography" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
 .modal {
-    z-index: 100;
-    position: fixed;
-    top: 22vh;
-    left: 10%;
-    width: 80%;
-    background: $main-color-users-item;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    border-radius: 8px;
+  z-index: 100;
+  position: fixed;
+  top: 22vh;
+  left: 10%;
+  width: 80%;
+  background: $main-color-users-item;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 8px;
 
-    @include tablet {
-        left: calc(50% - 20rem);
-        width: 40rem;
+  @include tablet {
+    left: calc(50% - 20rem);
+    width: 40rem;
+  }
+
+  &__header {
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    padding: 0.5rem;
+    background: $bg-header-modal;
+  }
+
+  &__title {
+    text-align: center;
+    @include font-stack-second-heading;
+    color: $main-color-users-item;
+    margin: 0.5rem;
+  }
+
+  &__content {
+    padding: 1rem 0.5rem;
+
+    &-place-item-contents {
+      padding: 0;
     }
+  }
 
-    &__header {
-        border-radius: 8px 8px 0 0;
-        width: 100%;
-        padding: 0.5rem;
-        background: $bg-header-modal;
-    }
+  &__footer {
+    border-radius: 0 0 8px 8px;
+    background: $bg-header-modal;
+    padding: 0.5rem;
 
-    &__title {
-        text-align: center;
-        @include font-stack-second-heading;
-        color: $main-color-users-item;
+    &-place-item-actions {
+      text-align: right;
+
+      & button,
+      & a {
         margin: 0.5rem;
+      }
     }
+  }
 
-    &__content {
-        padding: 1rem 0.5rem;
+  &__map-container {
+    height: 15rem;
+    width: 100%;
+  }
 
-        &-place-item-contents {
-            padding: 0;
-        }
-    }
-
-    &__footer {
-        border-radius: 0 0 8px 8px;
-        background: $bg-header-modal;
-        padding: 0.5rem;
-
-        &-place-item-actions {
-            text-align: right;
-
-            & button,
-            & a {
-                margin: 0.5rem;
-            }
-        }
-    }
-
-    &__map-container {
-        height: 15rem;
-        width: 100%;
-    }
-
-    &__content {
-        text-align: center;
-        color: $font-color-place-card;
-    }
-
+  &__content {
+    text-align: center;
+    color: $font-color-place-card;
+  }
 }

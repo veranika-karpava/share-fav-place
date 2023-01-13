@@ -20,13 +20,34 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint:check": "eslint 'src/**/*.{js,jsx}'",
+    "eslint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
+    "prettier:check": "prettier --check 'src/**/*.{js,jsx,scss}'",
+    "prettier:write": "prettier --write 'src/**/*.{js,jsx,scss}'",
+    "delint": "npm run eslint:fix; npm run prettier:write"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "react/prop-types": "off",
+      "prefer-destructuring": "error",
+      "camelcase": [
+        "error",
+        {
+          "ignoreDestructuring": true,
+          "properties": "never"
+        }
+      ],
+      "linebreak-style": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -43,5 +64,21 @@
   "main": "index.js",
   "author": "Veranika Karpava",
   "license": "ISC",
-  "description": "a full-stack web app"
+  "description": "a full-stack web app",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "2.8.2",
+    "prettier-eslint": "^15.0.1"
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "semi": true,
+    "arrowParens": "avoid",
+    "singleQuote": true
+  }
 }

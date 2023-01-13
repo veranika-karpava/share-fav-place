@@ -1,41 +1,41 @@
-@use "../../styles/partials/typography" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
 .footer {
-    position: absolute;
-    bottom: -10%;
-    padding: 1rem;
-    background-color: $color-header-button;
+  position: absolute;
+  bottom: -10%;
+  padding: 1rem;
+  background-color: $color-header-button;
+  width: 100%;
+
+  &__text {
+    font-size: 0.8rem;
     width: 100%;
+    // text-align: center;
 
-    &__text {
-        font-size: 0.8rem;
-        width: 100%;
-        // text-align: center;
-
-        @include tablet {
-            font-size: 1.25rem;
-        }
+    @include tablet {
+      font-size: 1.25rem;
     }
+  }
 
-    &__container-heart-icon {
-        margin: 0 0.5rem;
+  &__container-heart-icon {
+    margin: 0 0.5rem;
 
-        @include tablet {
-            margin: 0 0rem;
-        }
+    @include tablet {
+      margin: 0 0rem;
     }
+  }
 
-    &__icon-heart {
-        color: $main-color-users-item;
-        width: 5%;
-        min-width: 1rem;
-        min-height: 1rem;
+  &__icon-heart {
+    color: $main-color-users-item;
+    width: 5%;
+    min-width: 1rem;
+    min-height: 1rem;
 
-        @include tablet {
-            min-width: 1.25rem;
-            min-height: 1.25rem;
-        }
+    @include tablet {
+      min-width: 1.25rem;
+      min-height: 1.25rem;
     }
+  }
 }

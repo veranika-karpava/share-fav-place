@@ -1,28 +1,27 @@
-@use "../../styles/partials/typography" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
-
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
 .image-upload {
-    color: $color-font-disabled;
+  color: $color-font-disabled;
 
-    &.center {
-        @include flex(flex-start, center, column, nowrap);
-    }
+  &.center {
+    @include flex(flex-start, center, column, nowrap);
+  }
 
-    &__preview {
-        width: 13rem;
-        height: 13rem;
-        border: 1px solid $color-button-disabled;
-        border-radius: 4px;
-        @include flex(center, center, row, nowrap);
-        text-align: center;
-        margin-bottom: 1rem;
-    }
+  &__preview {
+    width: 13rem;
+    height: 13rem;
+    border: 1px solid $color-button-disabled;
+    border-radius: 4px;
+    @include flex(center, center, row, nowrap);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 
-    &__image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }

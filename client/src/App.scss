@@ -1,83 +1,83 @@
-@use "./styles/partials/typography" as *;
-@use "./styles/partials/mixins" as *;
-@use "./styles/partials/variables" as *;
+@use './styles/partials/typography' as *;
+@use './styles/partials/mixins' as *;
+@use './styles/partials/variables' as *;
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    @include font-stack-main;
-    background: $bg-body;
-    position: relative;
-    min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+  @include font-stack-main;
+  background: $bg-body;
+  position: relative;
+  min-height: 100vh;
 }
 
 main {
-    margin-top: 5rem;
+  margin-top: 5rem;
 }
 
 h2 {
-    @include font-stack-second-heading;
+  @include font-stack-second-heading;
 }
 
 h3 {
-    @include font-stack-third-heading;
+  @include font-stack-third-heading;
 }
 
 .message {
-    width: 90%;
-    text-align: center;
-    @include flex(center, center, row, nowrap);
+  width: 90%;
+  text-align: center;
+  @include flex(center, center, row, nowrap);
 
-    @include tablet {
-        width: 50%;
-    }
+  @include tablet {
+    width: 50%;
+  }
 
-    &__content,
-    &__link {
-        width: 100%;
-        margin-bottom: 0.5rem;
-        @include font-stack-message-error;
-    }
+  &__content,
+  &__link {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    @include font-stack-message-error;
+  }
 }
 
 .slide-in-left-enter {
-    transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .slide-in-left-enter-active {
-    transform: translateX(0);
-    opacity: 1;
-    transition: all 200ms;
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 200ms;
 }
 
 .slide-in-left-exit {
-    transform: translateX(0%);
-    opacity: 1;
+  transform: translateX(0%);
+  opacity: 1;
 }
 
 .slide-in-left-exit-active {
-    transform: translateX(-100%);
-    opacity: 0;
-    transition: all 200ms;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 200ms;
 }
 
 .user-places,
 .message__container-loading {
-    @include flex(center, center, column, nowrap);
-    width: 100%;
+  @include flex(center, center, column, nowrap);
+  width: 100%;
 
-    @include tablet {
-        @include flex(center, center, row, nowrap);
-    }
+  @include tablet {
+    @include flex(center, center, row, nowrap);
+  }
 }
 
 .message__container-loading {
-    height: 100vh;
+  height: 100vh;
 }

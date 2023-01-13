@@ -1,12 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 
-import './BackDrop.scss'
+import './BackDrop.scss';
 
 const BackDrop = ({ onClick }) => {
-    return ReactDOM.createPortal(
-        <div className='header__backdrop' onClick={onClick}></div>, document.getElementById('backdrop-hook')
-    )
-}
+  return createPortal(
+    <div
+      className="header__backdrop"
+      onClick={onClick}
+      aria-hidden="true"
+    ></div>,
+    document.getElementById('backdrop-hook')
+  );
+};
 
 export default BackDrop;

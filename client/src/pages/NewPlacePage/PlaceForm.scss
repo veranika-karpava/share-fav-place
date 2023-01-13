@@ -1,33 +1,33 @@
-@use "../../styles/partials/typography" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
 .place-form {
-    &__title {
-        text-align: center;
-        margin-bottom: 1rem;
-        @include font-stack-second-heading;
-        color: $font-color-place-card;
-    }
+  &__title {
+    text-align: center;
+    margin-bottom: 1rem;
+    @include font-stack-second-heading;
+    color: $font-color-place-card;
+  }
 
-    &__form {
-        margin: 0 auto;
-        padding: 1rem;
-        width: 90%;
-        max-width: 40rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-        border-radius: 6px;
-        background: $main-color-users-item;
-    }
+  &__form {
+    margin: 0 auto;
+    padding: 1rem;
+    width: 90%;
+    max-width: 40rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 6px;
+    background: $main-color-users-item;
+  }
 
-    &__actions {
-        width: 100%;
-        padding: 1rem 0;
-        @include flex(flex-end, center, row, nowrap);
-        gap: 1rem;
+  &__actions {
+    width: 100%;
+    padding: 1rem 0;
+    @include flex(flex-end, center, row, nowrap);
+    gap: 1rem;
 
-        @include tablet {
-            gap: 1.5rem;
-        }
+    @include tablet {
+      gap: 1.5rem;
     }
+  }
 }

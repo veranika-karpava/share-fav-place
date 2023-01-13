@@ -1,59 +1,59 @@
-@use "../../styles/partials/typography" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
 .button {
-    &__button-default {
-        @include font-stack-button;
-        padding: 0.5rem 0.8rem;
-        border: 1px solid $color-header-button;
-        border-radius: 4px;
-        background: $color-header-button;
-        cursor: pointer;
+  &__button-default {
+    @include font-stack-button;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid $color-header-button;
+    border-radius: 4px;
+    background: $color-header-button;
+    cursor: pointer;
 
-        &:focus {
-            outline: none;
-        }
-
-        &:hover,
-        &:active {
-            background: $color-button-hover;
-            border-color: $color-button-hover;
-        }
-
-        @include tablet {
-            padding: 0.5rem 1.5rem;
-        }
-
-        &:disabled,
-        &:hover:disabled,
-        &:active:disabled {
-            background: $color-button-disabled;
-            color: $color-font-disabled;
-            border-color: $color-button-disabled;
-            cursor: not-allowed;
-        }
+    &:focus {
+      outline: none;
     }
 
-    &__button-inverse {
-        background: transparent;
-        color: $color-header-button;
-
-        &:hover,
-        &:active {
-            color: $main-color-users-item;
-            background: $color-header-button;
-        }
+    &:hover,
+    &:active {
+      background: $color-button-hover;
+      border-color: $color-button-hover;
     }
 
-    &__button-danger {
-        background: $color-button-delete;
-        border-color: $color-button-delete;
-
-        &:hover,
-        &:active {
-            background: $color-button-delete-hover;
-            border-color: $color-button-delete-hover;
-        }
+    @include tablet {
+      padding: 0.5rem 1.5rem;
     }
+
+    &:disabled,
+    &:hover:disabled,
+    &:active:disabled {
+      background: $color-button-disabled;
+      color: $color-font-disabled;
+      border-color: $color-button-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  &__button-inverse {
+    background: transparent;
+    color: $color-header-button;
+
+    &:hover,
+    &:active {
+      color: $main-color-users-item;
+      background: $color-header-button;
+    }
+  }
+
+  &__button-danger {
+    background: $color-button-delete;
+    border-color: $color-button-delete;
+
+    &:hover,
+    &:active {
+      background: $color-button-delete-hover;
+      border-color: $color-button-delete-hover;
+    }
+  }
 }
