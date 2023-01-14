@@ -22,7 +22,7 @@ const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  const [formState, inputHandler, setFormData] = useForm(
+  const [formState, handleInputSubmit, setFormData] = useForm(
     {
       email: {
         value: '',
@@ -109,7 +109,7 @@ const Auth = () => {
           {!isLoginMode && (
             <ImageUpload
               id="image"
-              onInput={inputHandler}
+              onInput={handleInputSubmit}
               errorText="Please provide an image"
             />
           )}
@@ -122,7 +122,7 @@ const Auth = () => {
               placeholder="Please enter your Username"
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Please enter an Username"
-              onInput={inputHandler}
+              onInput={handleInputSubmit}
             />
           )}
           <Input
@@ -133,7 +133,7 @@ const Auth = () => {
             placeholder="Please enter your email"
             validators={[VALIDATOR_EMAIL()]}
             errorText="Please enter a valid email address."
-            onInput={inputHandler}
+            onInput={handleInputSubmit}
           />
           <Input
             id="password"
@@ -143,7 +143,7 @@ const Auth = () => {
             placeholder="Please enter your password"
             validators={[VALIDATOR_MINLENGTH(6)]}
             errorText="Please enter a valid password, at least 6 characters."
-            onInput={inputHandler}
+            onInput={handleInputSubmit}
           />
           <Button type="submit" disabled={!formState.isValid}>
             {isLoginMode ? 'LOG IN' : 'SIGN UP'}

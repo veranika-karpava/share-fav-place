@@ -1,13 +1,10 @@
 import { useState, useCallback } from 'react';
 
-// name must contain use at the beginning - rule of hooks
 export const useHttpClient = () => {
-  // for managing loading and error state
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  // function w/t default param
-  // useCallback  - don't allow recreate this func when component that uses this hook renders
+  // for sending API request with default values
   const sendRequest = useCallback(
     async (url, method = 'GET', body = null, headers = {}) => {
       setIsLoading(true);

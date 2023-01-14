@@ -26,7 +26,7 @@ const UpdatePlace = () => {
   const { placeId } = useParams();
 
   //formData for update info about place with default values
-  const [formState, inputHandler, setFormData] = useForm(
+  const [formState, handleInputSubmit, setFormData] = useForm(
     {
       title: {
         value: '',
@@ -125,7 +125,7 @@ const UpdatePlace = () => {
             label="Title"
             validators={[VALIDATOR_REQUIRE()]}
             errorText="Please enter a valid title"
-            onInput={inputHandler}
+            onInput={handleInputSubmit}
             initialValue={loadedPlaces.title}
             initialValid={true}
           />
@@ -135,7 +135,7 @@ const UpdatePlace = () => {
             label="Description"
             validators={[VALIDATOR_MINLENGTH(5)]}
             errorText="Please enter a valid description (min 5 characters)."
-            onInput={inputHandler}
+            onInput={handleInputSubmit}
             initialValue={loadedPlaces.description}
             initialValid={true}
           />

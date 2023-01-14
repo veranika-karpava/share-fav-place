@@ -1,11 +1,12 @@
 import { createContext } from 'react';
 
+// create context object with default value
 export const AuthContext = createContext({
+  // properties
   isLoggedIn: false,
   userId: null,
   token: null,
-  login: () => {},
-  logout: () => {},
+  // methods
+  login: () => { },
+  logout: () => { },
 });
-// isLoggedIn - property in the object
-// login/logout - as methods

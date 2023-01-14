@@ -23,7 +23,7 @@ const NewPlace = () => {
   const history = useHistory();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   // form state with default values
-  const [formState, inputHandler] = useForm({
+  const [formState, handleInputSubmit] = useForm({
     title: {
       value: '',
       isValid: false,
@@ -71,7 +71,7 @@ const NewPlace = () => {
         <ImageUpload
           center
           id="image"
-          onInput={inputHandler}
+          onInput={handleInputSubmit}
           errorText="Please provide an image"
         />
         <Input
@@ -81,7 +81,7 @@ const NewPlace = () => {
           label="Title"
           errorText="Please enter a valid title."
           validators={[VALIDATOR_REQUIRE()]}
-          onInput={inputHandler}
+          onInput={handleInputSubmit}
         />
         <Input
           id="description"
@@ -89,7 +89,7 @@ const NewPlace = () => {
           label="Description"
           errorText="Please enter a valid description (at least 5 characters)."
           validators={[VALIDATOR_MINLENGTH(5)]}
-          onInput={inputHandler}
+          onInput={handleInputSubmit}
           maxlength="100"
         />
         <Input
@@ -98,7 +98,7 @@ const NewPlace = () => {
           label="Address"
           errorText="Please enter a valid address."
           validators={[VALIDATOR_REQUIRE()]}
-          onInput={inputHandler}
+          onInput={handleInputSubmit}
         />
         <Button
           type="submit"

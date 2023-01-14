@@ -1,15 +1,17 @@
 import { useCallback, useReducer } from 'react';
 
-// reducer for useReducer hook
+// reducer function that specifies how to state gets updated
 const formReducer = (state, action) => {
   switch (action.type) {
     case 'INPUT_CHANGE': {
       let formIsValid = true;
       for (const inputId in state.inputs) {
+        // if it's undefied, skip property and go to new inputId
         if (!state.inputs[inputId]) {
-          continue; // skip property that is undefined and go to new inputId
+          continue;
         }
         if (inputId === action.inputId) {
+          // if first value is falsy, result will be first value, otherwise second value
           formIsValid = formIsValid && action.isValid;
         } else {
           formIsValid = formIsValid && state.inputs[inputId].isValid;
@@ -35,15 +37,17 @@ const formReducer = (state, action) => {
   }
 };
 
-// custom hooks
+// name of custom hook for form should contain word 'use'
 export const useForm = (initialInputs, initialFormValidity) => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
     isValid: initialFormValidity,
   });
 
-  // for sharing information from input component to newplace
-  const inputHandler = useCallback((id, value, isValid) => {
+  // for sharing data of Input component (new place) to server
+  // [] - empty depend - when component re-renders, function (first argument) is created and memorized
+  // and can be reused
+  const handleInputSubmit = useCallback((id, value, isValid) => {
     dispatch({
       type: 'INPUT_CHANGE',
       value: value,
@@ -51,9 +55,8 @@ export const useForm = (initialInputs, initialFormValidity) => {
       inputId: id,
     });
   }, []);
-  // empty dependencies means if component re-renders or re-executes, this func will be stored away by React and will be reused( no creation new functio  object) and not changed => doesn't effect the useEffect
 
-  // to get information form server before update data
+  //for getting data from server before update data in form
   const setFormData = useCallback((inputData, formValidity) => {
     dispatch({
       type: 'SET_DATA',
@@ -62,5 +65,5 @@ export const useForm = (initialInputs, initialFormValidity) => {
     });
   }, []);
 
-  return [formState, inputHandler, setFormData];
+  return [formState, handleInputSubmit, setFormData];
 };
