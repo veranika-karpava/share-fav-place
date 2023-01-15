@@ -30,6 +30,10 @@ h3 {
   @include font-stack-third-heading;
 }
 
+button {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .message {
   width: 90%;
   text-align: center;

@@ -19,15 +19,11 @@
   font-display: swap;
 }
 
-@mixin font-stack(
-  $font-family,
-  $font-style,
+@mixin font-stack($font-style,
   $font-size,
   $font-weight,
   $line-height,
-  $color
-) {
-  font-family: $font-family;
+  $color) {
   font-style: $font-style;
   font-size: $font-size;
   font-weight: $font-weight;
@@ -37,26 +33,20 @@
 
 // main font stack
 @mixin font-stack-main {
-  @include font-stack(
-    'Open Sans',
-    normal,
+  @include font-stack(normal,
     1rem,
     400,
     1.2rem,
-    $main-color-users-item
-  );
+    $main-color-users-item );
 }
 
 // font for h2 in list of users
 @mixin font-stack-second-heading {
-  @include font-stack(
-    'Open Sans',
-    normal,
+  @include font-stack(normal,
     1.25rem,
     700,
     1.25rem,
-    $bg-users-item-hover
-  );
+    $bg-users-item-hover );
 
   @include tablet {
     font-size: 1.4rem;
@@ -65,14 +55,11 @@
 
 // font for h3 in list of users
 @mixin font-stack-third-heading {
-  @include font-stack(
-    'Open Sans',
-    normal,
+  @include font-stack(normal,
     1.1rem,
     700,
     1.2rem,
-    $bg-users-item-hover
-  );
+    $bg-users-item-hover );
 
   @include tablet {
     font-size: 1.2rem;
@@ -81,14 +68,11 @@
 
 // font for button
 @mixin font-stack-button {
-  @include font-stack(
-    'Open Sans',
-    normal,
+  @include font-stack(normal,
     0.8rem,
     400,
     1rem,
-    $main-color-users-item
-  );
+    $main-color-users-item );
 
   @include tablet {
     font-size: 1rem;
@@ -97,26 +81,20 @@
 
 // font for content in error message
 @mixin font-stack-message-error {
-  @include font-stack(
-    'Open Sans',
-    normal,
+  @include font-stack(normal,
     1.25rem,
     700,
     1.25rem,
-    $color-header-button
-  );
+    $color-header-button );
 }
 
 // font for invalid update place and add new one
 @mixin font-stack-warning-message {
-  @include font-stack(
-    'Open Sans',
-    normal,
+  @include font-stack(normal,
     0.7rem,
     400,
     0.7rem,
-    $font-color-warning
-  );
+    $font-color-warning );
 
   @include tablet {
     font-size: 0.8rem;

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiHeart } from 'react-icons/fi';
+// import { FiHeart } from 'react-icons/fi';
 
 import './Header.scss';
+import DynamicIcon from '../DynamicIcon/DynamicIcon';
 import NavLinks from '../Navigation/NavLinks';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import BackDrop from '../BackDrop/BackDrop';
@@ -35,7 +36,9 @@ const Header = () => {
           <h1 className="header__logo">
             Ur
             <span className="header__container-icon">
-              <FiHeart className="header__icon-logo" />
+              <DynamicIcon
+                name='FiHeart'
+                className='header__icon-logo' />
             </span>
             Places
           </h1>
@@ -43,12 +46,13 @@ const Header = () => {
         {!drawerIsOpen && (
           <button
             className="header__menu-button"
+            value="Menu Button"
             onClick={openDrawerHandler}
             aria-hidden="true"
           >
-            <span />
-            <span />
-            <span />
+            <DynamicIcon
+              name='CgMenu'
+              className='header__icon-menu' />
           </button>
         )}
         <nav className="header__navigation-links">
