@@ -15,8 +15,7 @@
     margin: 1px;
     border-radius: 50%;
     border: 5px solid $color-color-border;
-    border-color: $color-color-border transparent $color-color-border
-      transparent;
+    border-color: $color-color-border transparent $color-color-border transparent;
 
     @include keyframes(spin) {
       0% {
