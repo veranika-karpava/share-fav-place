@@ -2,15 +2,15 @@
   "name": "server",
   "version": "1.0.0",
   "description": "a full-stack web app",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js & npm run delint",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint:check": "eslint '**/*.{js,jsx}'",
     "eslint:fix": "eslint --fix '**/*.{js,jsx}'",
     "prettier:check": "prettier --check '**/*.{js,jsx}'",
     "prettier:write": "prettier --write '**/*.{js,jsx}'",
-    "delint": "npm run eslint:fix; npm run prettier:write"
+    "delint": "npm run eslint:fix & npm run prettier:write"
   },
   "author": "Veranika Karpava",
   "license": "ISC",
