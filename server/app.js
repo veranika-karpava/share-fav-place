@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 process.env.NODE_ENV !== 'production' && require('dotenv').config();
@@ -9,6 +10,7 @@ const usersRouter = require('./middleware/usersRouter');
 const HttpError = require('./models/http-error');
 
 const app = express();
+app.use(cors());
 
 // middlewares
 // for parsing body that should be before registation routers
@@ -18,18 +20,18 @@ app.use(bodyParser.json());
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 // for handling CORS error
-app.use((_req, res, next) => {
-  // * allows any domain to send request
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  // type of headers that sent by the browser
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  // HTTP methods that can be used in client side
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-  next();
-});
+// app.use((_req, res, next) => {
+//   // * allows any domain to send request
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   // type of headers that sent by the browser
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//   );
+//   // HTTP methods that can be used in client side
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+//   next();
+// });
 
 // for registration routers
 app.use('/api/places', placesRouter);
