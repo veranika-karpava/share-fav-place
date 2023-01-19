@@ -12,7 +12,7 @@ const JWT_KEY = process.env.JWT_SECRET_KEY;
 const getListUsers = async (_req, res, next) => {
   let users;
   try {
-    users = await User.find({}, '-password').populate('places'); // all data except password
+    users = await User.find({}, '-password'); // all data except password
   } catch (err) {
     return next(
       new HttpError('Fetching users failed, please try again later.', 500)

@@ -2,7 +2,9 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-process.env.NODE_ENV !== 'production' && require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+};
 
 const placesRouter = require('./middleware/placesRouter');
 const usersRouter = require('./middleware/usersRouter');
