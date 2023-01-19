@@ -5,6 +5,7 @@ import Card from '../Card/Card';
 import './UserList.scss';
 
 const UserList = ({ users }) => {
+
   if (users.length === 0) {
     return (
       <div className="message">
@@ -24,7 +25,6 @@ const UserList = ({ users }) => {
           image={user.image}
           name={user.name}
           placeCount={user.places.length}
-          listPlaces={user.places}
         />
       ))}
     </ul>

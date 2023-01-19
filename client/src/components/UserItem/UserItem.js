@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../Avatar/Avatar';
-import Carousel from '../Carousel/Carousel';
 import Card from '../Card/Card';
 import './UserItem.scss';
+import { AuthContext } from '../../helpers/contex/auth_context';
 const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
-const UserItem = ({ id, image, name, placeCount, listPlaces }) => {
+const UserItem = ({ id, image, name, placeCount }) => {
+  const auth = useContext(AuthContext);
 
   return (
-    <li className="users__item">
-      <Card className="users__item-content">
+    <li className={auth.userId === id ? "users__item users__item--active" : "users__item"} >
+      <Card className={auth.userId === id ? "users__item-content users__item-content--active" : 'users__item-content'}>
         <Link to={`/${id}/places`} className="users__item-link">
           <div className="users__item-image">
             <Avatar
@@ -28,12 +29,10 @@ const UserItem = ({ id, image, name, placeCount, listPlaces }) => {
             <h3 className="users__item-shared-places">
               {placeCount} {placeCount === 1 ? 'Place' : 'Places'} Shared
             </h3>
-
           </div>
         </Link>
-        {listPlaces.length !== 0 && <Carousel listPlaces={listPlaces} />}
       </Card>
-    </li>
+    </li >
   );
 };
 

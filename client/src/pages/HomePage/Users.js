@@ -8,15 +8,15 @@ import { useHttpClient } from '../../helpers/hooks/http-hook';
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Users = () => {
+
   const [loadedUsers, setLoadedUsers] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const responseData = await sendRequest(`${API_URL}/users`);
-
-        setLoadedUsers(responseData.users);
+        const responseUsers = await sendRequest(`${API_URL}/users`);
+        setLoadedUsers(responseUsers.users);
       } catch (err) {
         console.log(err);
       }
@@ -25,14 +25,15 @@ const Users = () => {
   }, [sendRequest]);
 
   return (
-    <section className="users">
+    <section className="users" >
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
-        <div className="message__container-loading">
+        <div className="message__container-loading" style={{ marginTop: '-5rem' }}>
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedUsers && <UserList users={loadedUsers} />}
+      {!isLoading && loadedUsers && <UserList users={loadedUsers} />
+      }
     </section>
   );
 };

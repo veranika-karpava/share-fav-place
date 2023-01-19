@@ -11,6 +11,10 @@
     @include tablet {
       width: calc(48% - 2rem);
     }
+
+    &--active {
+      order: -1
+    }
   }
 
   &__item-link {
@@ -36,6 +40,10 @@
 
   &__item-content {
     padding: 0 !important;
+
+    &--active {
+      border: 1px solid $bg-users-item-hover;
+    }
   }
 
   &__item-image {

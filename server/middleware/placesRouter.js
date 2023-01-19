@@ -15,8 +15,6 @@ const loggedIn = require('./authMiddleware');
 
 const placesRouter = express.Router();
 
-placesRouter.get('/', getListPlaces);
-
 // get a place by specified place ID(pid)
 placesRouter.get('/:pid', getPlaceById);
 
