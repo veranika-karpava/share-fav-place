@@ -18,7 +18,7 @@ const Map = ({ center, zoom, styles }) => {
     new window.google.maps.Marker({ position: center, map: map });
   }, [center, zoom]); //when the dependecies empty array, it render only once when the component is initial mounted
 
-  return <div className="map" style={styles} ref={mapRef}></div>;
+  return <div className="map" style={styles} ref={mapRef}  ></div>;
 };
 
 export default Map;

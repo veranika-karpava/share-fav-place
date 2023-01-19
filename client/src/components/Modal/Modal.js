@@ -18,7 +18,8 @@ const ModalOverlay = ({
   footer,
 }) => {
   const content = (
-    <div className={`modal ${className}`} style={style}>
+    <div className={`modal ${className}`} style={style} data-aos="zoom-in"
+      data-aos-duration="500">
       <header className={`modal__header modal__header-${headerClass}`}>
         <h2 className="modal__title">{header}</h2>
       </header>
