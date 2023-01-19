@@ -5,7 +5,12 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint:check": "eslint 'src/**/*.{js,jsx}'",
+    "eslint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
+    "prettier:check": "prettier --check 'src/**/*.{js,jsx,scss}'",
+    "prettier:write": "prettier --write 'src/**/*.{js,jsx,scss}'",
+    "delint": "npm run eslint:fix; npm run prettier:write"
   },
   "author": "Veranika Karpava",
   "license": "ISC",
@@ -14,7 +19,6 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cloudinary": "^1.32.0",
-    "cors": "^2.8.5",
     "datauri": "^4.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
