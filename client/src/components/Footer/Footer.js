@@ -1,7 +1,8 @@
 import React from 'react';
-import { FaHeart } from 'react-icons/fa';
 
 import './Footer.scss';
+import DynamicIcon from '../DynamicIcon/DynamicIcon';
+
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
       <p className="footer__text">
         Created with
         <span className="footer__container-heart-icon">
-          <FaHeart className="footer__icon-heart" />
+          <DynamicIcon name='FaHeart' className='footer__icon-heart' />
         </span>
         by Veranika Karpava © 2022{' '}
       </p>
