@@ -8,7 +8,6 @@ import { useHttpClient } from '../../helpers/hooks/http-hook';
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Users = () => {
-
   const [loadedUsers, setLoadedUsers] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -25,15 +24,17 @@ const Users = () => {
   }, [sendRequest]);
 
   return (
-    <section className="users" >
+    <section className="users">
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
-        <div className="message__container-loading" style={{ marginTop: '-5rem' }}>
+        <div
+          className="message__container-loading"
+          style={{ marginTop: '-5rem' }}
+        >
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedUsers && <UserList users={loadedUsers} />
-      }
+      {!isLoading && loadedUsers && <UserList users={loadedUsers} />}
     </section>
   );
 };

@@ -16,6 +16,7 @@ const UserPlaces = () => {
   // get userID from url params
   const { userId } = useParams();
 
+  // for fetching places fro specified userID
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -30,7 +31,7 @@ const UserPlaces = () => {
     fetchPlaces();
   }, [sendRequest, userId]);
 
-  // event handler to remove place from the place's list
+  //for removing place from the list of places
   const placeDeleteHandler = deletedPlaceId => {
     setLoadedPlaces(prevPlaces =>
       prevPlaces.filter(place => place.id !== deletedPlaceId)
@@ -40,7 +41,10 @@ const UserPlaces = () => {
   return (
     <section className="user-places">
       {isLoading && (
-        <div className="message__container-loading" style={{ marginTop: '-5rem' }}>
+        <div
+          className="message__container-loading"
+          style={{ marginTop: '-5rem' }}
+        >
           <LoadingSpinner />
         </div>
       )}
@@ -55,7 +59,7 @@ const UserPlaces = () => {
             {auth.userId === userId ? (
               <Button to="/places/new">SHARE YOUR PLACE</Button>
             ) : (
-              <Button to="/">BACK TO MAIN PAGE</Button>
+              <Button to="/">BACK TO HOME PAGE</Button>
             )}
           </Card>
         </div>

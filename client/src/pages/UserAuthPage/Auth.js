@@ -52,7 +52,7 @@ const Auth = () => {
         },
         false
       );
-      //for sign up form
+      //for signing up form
     }
     setIsLoginMode(prevMode => !prevMode);
   };
@@ -111,6 +111,7 @@ const Auth = () => {
               id="image"
               onInput={handleInputSubmit}
               errorText="Please provide an image"
+              center
             />
           )}
           {!isLoginMode && (

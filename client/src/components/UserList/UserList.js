@@ -5,7 +5,6 @@ import Card from '../Card/Card';
 import './UserList.scss';
 
 const UserList = ({ users }) => {
-
   if (users.length === 0) {
     return (
       <div className="message">

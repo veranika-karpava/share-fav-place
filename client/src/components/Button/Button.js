@@ -18,8 +18,9 @@ const Button = ({
   if (href) {
     return (
       <a
-        className={`button__button-${size || 'default'} ${inverse && 'button__button-inverse'
-          } ${danger && 'button__button-danger'}`}
+        className={`button__button-${size || 'default'} ${
+          inverse && 'button__button-inverse'
+        } ${danger && 'button__button-danger'}`}
         href={href}
       >
         {children}
@@ -31,8 +32,9 @@ const Button = ({
       <Link
         to={to}
         exact={exact}
-        className={`button__button-${size || 'default'} ${inverse && 'button__button-inverse'
-          } ${danger && 'button__button-danger'}`}
+        className={`button__button-${size || 'default'} ${
+          inverse && 'button__button-inverse'
+        } ${danger && 'button__button-danger'}`}
       >
         {children}
       </Link>
@@ -41,8 +43,9 @@ const Button = ({
   return (
     // button for submit form
     <button
-      className={`button__button-${size || 'default'} ${inverse && 'button__button-inverse'
-        } ${danger && 'button__button-danger'}`}
+      className={`button__button-${size || 'default'} ${
+        inverse && 'button__button-inverse'
+      } ${danger && 'button__button-danger'}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -54,5 +57,9 @@ const Button = ({
 
 export default Button;
 
-{/*||: 1st expression is always outputted. The 2nd expression only gets outputted if the 1st expression is falsy.  */ }
-{/* &&: 1st expression is outputted if it's FALSY. The 2nd expression only get outputted if the 1st expression is truthy. */ }
+{
+  /*||: 1st expression is always outputted. The 2nd expression only gets outputted if the 1st expression is falsy.  */
+}
+{
+  /* &&: 1st expression is outputted if it's FALSY. The 2nd expression only get outputted if the 1st expression is truthy. */
+}

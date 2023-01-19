@@ -11,8 +11,18 @@ const UserItem = ({ id, image, name, placeCount }) => {
   const auth = useContext(AuthContext);
 
   return (
-    <li className={auth.userId === id ? "users__item users__item--active" : "users__item"} >
-      <Card className={auth.userId === id ? "users__item-content users__item-content--active" : 'users__item-content'}>
+    <li
+      className={
+        auth.userId === id ? 'users__item users__item--active' : 'users__item'
+      }
+    >
+      <Card
+        className={
+          auth.userId === id
+            ? 'users__item-content users__item-content--active'
+            : 'users__item-content'
+        }
+      >
         <Link to={`/${id}/places`} className="users__item-link">
           <div className="users__item-image">
             <Avatar
@@ -32,7 +42,7 @@ const UserItem = ({ id, image, name, placeCount }) => {
           </div>
         </Link>
       </Card>
-    </li >
+    </li>
   );
 };
 

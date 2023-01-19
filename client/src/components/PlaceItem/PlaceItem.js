@@ -86,7 +86,11 @@ const PlaceItem = ({
           Do you want to proceed and delete this place?
         </p>
       </Modal>
-      <li className="user-places__item">
+      <li
+        className="user-places__item"
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+      >
         <Card className="user-places__card">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="user-places__view">

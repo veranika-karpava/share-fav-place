@@ -1,5 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 import './App.scss';
 import Header from './components/Header/Header';
@@ -19,6 +21,14 @@ const App = () => {
   // for using expiration token
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
+  useEffect(() => {
+    Aos.refresh();
+  });
 
   const login = useCallback((uid, token, expirationDate) => {
     setToken(token);

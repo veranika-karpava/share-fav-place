@@ -10,12 +10,11 @@ const ImageUpload = ({ center, errorText, id, onInput }) => {
   // check that image is picked or not
   const [isValid, setIsValid] = useState(false);
 
-  // hook for pick image and save in virtual store
+  //for picking image and save in virtual store
   const filePickerRef = useRef();
 
-  // update preview everytime when file change
+  //for updating preview everytime when file changed
   useEffect(() => {
-    // if file isn't picked
     if (!file) {
       return;
     }
@@ -29,9 +28,8 @@ const ImageUpload = ({ center, errorText, id, onInput }) => {
     fileReader.readAsDataURL(file);
   }, [file]);
 
-  // event handler for picking image in form
+  //for picking image in a form
   const pickedHandler = e => {
-    // default JS - in the event target which are locked, which is this input element, you will have a files property that holds the files the user selected.
     let pickedFile;
     let fileIsValid = isValid;
     // .files = a fileList that contain file objs that user selected
@@ -48,7 +46,7 @@ const ImageUpload = ({ center, errorText, id, onInput }) => {
     onInput(id, pickedFile, fileIsValid);
   };
 
-  // event handler for picking image
+  // for picking image
   const pickImageHandler = () => filePickerRef.current.click();
 
   return (
