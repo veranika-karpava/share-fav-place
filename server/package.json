@@ -4,13 +4,8 @@
   "description": "a full-stack web app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js & npm run delint",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint:check": "eslint '**/*.{js,jsx}'",
-    "eslint:fix": "eslint --fix '**/*.{js,jsx}'",
-    "prettier:check": "prettier --check '**/*.{js,jsx}'",
-    "prettier:write": "prettier --write '**/*.{js,jsx}'",
-    "delint": "npm run eslint:fix & npm run prettier:write"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Veranika Karpava",
   "license": "ISC",
