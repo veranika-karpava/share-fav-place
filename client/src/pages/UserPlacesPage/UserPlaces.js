@@ -40,7 +40,7 @@ const UserPlaces = () => {
   return (
     <section className="user-places">
       {isLoading && (
-        <div className="message__container-loading">
+        <div className="message__container-loading" style={{ marginTop: '-5rem' }}>
           <LoadingSpinner />
         </div>
       )}

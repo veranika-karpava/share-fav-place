@@ -15,7 +15,6 @@ import { AuthContext } from './helpers/contex/auth_context';
 let logoutTimer;
 
 const App = () => {
-  // instead isLoggedIn
   const [token, setToken] = useState(false);
   // for using expiration token
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
@@ -45,7 +44,6 @@ const App = () => {
     setToken(null);
     setTokenExpirationDate(null);
     setUserId(null);
-    // remove token from Local Storage
     localStorage.removeItem('userData');
   }, []);
 
@@ -59,7 +57,7 @@ const App = () => {
     }
   }, [token, logout, tokenExpirationDate]);
 
-  // for loading this component first time
+  // for loading this component first time - it will run once when the component mounts
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem('userData'));
     if (
@@ -73,14 +71,15 @@ const App = () => {
         new Date(storedData.expiration)
       );
     }
-  }, [login]); // it will run once when the component mounts when it rendered for the first time becuase useCallback
+  }, [login]);
 
   let routes;
 
   if (token) {
     routes = (
       <Switch>
-        {/* means that when url with slash it renders Users page. Exact word means the only this path reneder Users page */}
+        {/* means that when url with slash it renders Users page. 
+        //Exact word means the only this path reneder Users page */}
         <Route path="/" exact>
           <HomePage />
         </Route>
@@ -109,7 +108,6 @@ const App = () => {
           <Auth />
         </Route>
         <Redirect to="/auth" />
-        {/* means that redirect to '/' path that render Users pages */}
       </Switch>
     );
   }
