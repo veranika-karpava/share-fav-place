@@ -3,8 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-};
+  require('dotenv').config();
+}
 
 const placesRouter = require('./middleware/placesRouter');
 const usersRouter = require('./middleware/usersRouter');

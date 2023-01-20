@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint:check": "eslint 'src/**/*.{js,jsx}'",
-    "eslint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
-    "prettier:check": "prettier --check 'src/**/*.{js,jsx,scss}'",
-    "prettier:write": "prettier --write 'src/**/*.{js,jsx,scss}'",
+    "eslint:check": "eslint '**/*.{js,jsx}'",
+    "eslint:fix": "eslint --fix '**/*.{js,jsx}'",
+    "prettier:check": "prettier --check '**/*.{js,jsx,scss}'",
+    "prettier:write": "prettier --write '**/*.{js,jsx,scss}'",
     "delint": "npm run eslint:fix; npm run prettier:write"
   },
   "author": "Veranika Karpava",
