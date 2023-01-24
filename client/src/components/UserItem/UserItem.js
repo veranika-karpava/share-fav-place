@@ -31,7 +31,7 @@ const UserItem = ({ id, image, name, placeCount }) => {
                   ? image
                   : `${ASSET_URL}/${image}`
               }
-              alt='user-avatar'
+              name={name}
             />
           </div>
           <div className="users__item-info">
