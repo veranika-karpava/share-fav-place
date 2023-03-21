@@ -13,7 +13,7 @@ const HttpError = require('./models/http-error');
 const app = express();
 
 // middlewares
-// for parsing body that should be before registation routers
+// for parsing incoming JSON requests and puts the parsed data in req.body
 app.use(bodyParser.json());
 
 // for accessing images locally
@@ -54,7 +54,7 @@ app.use((error, _req, res, next) => {
     .json({ message: error.message || 'An unknown error occured' });
 });
 
-// connect with database and listen port
+// for connection with database and listen port
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lhybrvz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
