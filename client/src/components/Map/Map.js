@@ -14,9 +14,9 @@ const Map = ({ center, zoom, styles }) => {
       center: center, //
       zoom: zoom, // how to display the map where 0 - Earth
     });
-    //create Marker that indentifies a location on a map.  position: {lat, lng} - initial location of marker, map: optional on which map to place the marker
+    //create Marker that identifies a location on a map.  position: {lat, lng} - initial location of marker, map: optional on which map to place the marker
     new window.google.maps.Marker({ position: center, map: map });
-  }, [center, zoom]); //when the dependecies empty array, it render only once when the component is initial mounted
+  }, [center, zoom]); //when the dependencies empty array, it render only once when the component is initial mounted
 
   return <div className="map" style={styles} ref={mapRef}></div>;
 };

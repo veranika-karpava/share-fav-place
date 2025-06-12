@@ -23,7 +23,7 @@ usersRouter.post(
   signUp
 );
 
-//for loging in
+//for login
 usersRouter.post('/login', logIn);
 
 module.exports = usersRouter;

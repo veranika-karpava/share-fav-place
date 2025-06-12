@@ -9,7 +9,7 @@ const getCoordForAddress = require('../util/location');
 const { dataUri } = require('../config/multerConfig');
 const { uploader } = require('../config/cloudinaryConfig');
 
-// for getting the forst place with the specified ID(pid)
+// for getting the first place with the specified ID(pid)
 const getPlaceById = async (req, res, next) => {
   // pid from url params
   const placeId = req.params.pid;
@@ -129,7 +129,7 @@ const createPlace = async (req, res, next) => {
     const sess = await mongoose.startSession();
     // transactions - allows to perform multiple operations in isolation of each other
     // start transaction in the current session.
-    //It's build in session. When the transaction is succefully
+    //It's build in session. When the transaction is successfully
     //the session is finished
     sess.startTransaction();
 

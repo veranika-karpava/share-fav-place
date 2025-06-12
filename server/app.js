@@ -44,14 +44,14 @@ app.use(async (_req, _res, next) => {
 
 // for catching error
 app.use((error, _req, res, next) => {
-  // check if a response has alredy been sent,
+  // check if a response has already been sent,
   if (res.headerSent) {
     return next(error);
   }
   // if not, sent now
   res
     .status(error.code || 500)
-    .json({ message: error.message || 'An unknown error occured' });
+    .json({ message: error.message || 'An unknown error occurred' });
 });
 
 // for connection with database and listen port
@@ -60,7 +60,7 @@ mongoose
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lhybrvz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
   .then(() => {
-    // if connection with db is succeseful, the port is listened
+    // if connection with db is successful, the port is listened
     app.listen(process.env.PORT || 5050, () => {
       console.log(`🚀 Server listening on ${process.env.PORT}`);
     });

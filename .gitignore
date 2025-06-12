@@ -32,3 +32,4 @@ yarn-error.log*
 **/*.log
 firebase-debug.log*
 firebase-debug.*.log*
+.qodo

@@ -44,7 +44,7 @@ if (process.env.STORAGE_TYPE == 'cloud') {
 const fileUpload = multer({
   // set limit for size of uploaded data in byte
   limits: 500000,
-  // storge where file should be stored
+  // storage where file should be stored
   storage: storage,
   // control which files are accepted
   fileFilter: fileFilter,
